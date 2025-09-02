@@ -1,12 +1,17 @@
+from app.core.logger import logger
 from typing import List, Optional
 import strawberry
+from strawberry import relay
 
-from app.schema.types.pagination import PageInfo
+
+from app.schema.shared.pagination import PageInfo
 from internal_sdk.place.google.client import GooglePlaceClient
 from strawberry.dataloader import DataLoader
 
 from typing import Type, TypeVar, Any
 from dataclasses import is_dataclass
+from strawberry.relay import Node
+from snowflakekit import SnowflakeGenerator
 
 
 T = TypeVar("T")
@@ -42,20 +47,44 @@ class Place:
     display_name: str
 
 
-async def load_places(keys: List[str]) -> List[Place]:
+async def load_places(keys: List[str]) -> List[Optional[Place]]:
     place_client = GooglePlaceClient("http://0.0.0.0:4002")
-    places_list = place_client.places(keys)
-    return [map_to_strawberry(place_info, Place) for place_info in places_list]
+
+    try:
+        places_list = place_client.places(keys)
+    except Exception as e:
+        logger.error(f"Failed to load places for keys {keys}: {e}")
+        return [None for _ in keys]
+
+    result = []
+    for place_info in places_list:
+        try:
+            mapped_place = map_to_strawberry(place_info, Place)
+            result.append(mapped_place)
+        except Exception as e:
+            logger.error(f"Failed to map place info {place_info}: {e}")
+            result.append(None)
+
+    return result
+
+
+class WorkspaceNode(Node):
+    def to_global_id(node_id: int) -> str:
+        return SnowflakeGenerator.encode_base62(node_id)
+
+    @staticmethod
+    def from_global_id(global_id: str) -> int:
+        return SnowflakeGenerator.decode_base62(global_id)
 
 
 @strawberry.type
 class Workspace:
-    id: strawberry.ID
+    id: relay.NodeID[int]
     name: str
     google_place_id: str
 
     @strawberry.field
-    async def location(self, info) -> Place:
+    async def location(self, info) -> Optional[Place]:
         loader: DataLoader = info.context["places_loader"]
         return await loader.load(self.google_place_id)
 

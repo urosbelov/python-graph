@@ -1,5 +1,5 @@
 from internal_sdk.workspace.client import PaginationRequest
-from app.schema.types.pagination import PageRequest
+from app.schema.shared.pagination import PageRequest
 
 
 def build_pagination(page: PageRequest | None) -> PaginationRequest:

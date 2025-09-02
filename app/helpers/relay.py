@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 from typing import List
-from app.schema.types.pagination import PageInfo
+from app.schema.shared.pagination import PageInfo
 
 
 def dict_to_obj(d):

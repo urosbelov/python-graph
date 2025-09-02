@@ -1,13 +1,12 @@
 import strawberry
 from typing import Optional
-from app.schema.types.workspace import (
+from app.schema.workspace.types import (
     WorkspaceFilters,
     WorkspaceConnection,
     WorkspaceEdge,
 )
 
-from app.schema.types.pagination import PageRequest
-from app.helpers.relay import create_connection
+from app.schema.shared.pagination import PageRequest
 from app.helpers.pagination import build_pagination
 from internal_sdk.workspace.client import (
     WorkspaceClient,
@@ -16,8 +15,7 @@ from internal_sdk.workspace.client import (
 
 
 @strawberry.type
-class WorkspaceQuery:
-
+class FetchWorkspacesQueries:
     @strawberry.field
     def workspaces(
         self,

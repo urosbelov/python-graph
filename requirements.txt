@@ -2,6 +2,9 @@ strawberry-graphql==0.281.0
 python-dotenv==1.1.1
 fastapi==0.116.1
 
+# ID
+snowflakekit==0.1.1
+
 
 
 git+https://GITHUB_TOKEN@github.com/yugonautica/libraries-python.git@main#egg=libraries

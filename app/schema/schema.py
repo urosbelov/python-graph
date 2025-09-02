@@ -1,9 +1,10 @@
 import strawberry
-from app.schema.queries.workspace_queries import WorkspaceQuery
-from app.schema.mutations.post_mutations import PostMutation
 
-# Dynamically combine all queries
+from app.schema.workspace.resolvers import WorkspaceQuery, WorkspaceMutation
+
+
+# Dynamically combine queries and mutations
 Query = type("Query", (WorkspaceQuery,), {})
-Mutation = type("Mutation", (PostMutation,), {})
+Mutation = type("Mutation", (WorkspaceMutation,), {})
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
