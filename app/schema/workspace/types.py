@@ -1,18 +1,27 @@
+from typing import Iterable, Optional
 import strawberry
 from strawberry import relay
+from app.context import Context
+from app.schema.workspace.service import map_to_dataclass
 
 
-# class WorkspaceNode(Node):
-#     def to_global_id(node_id: int) -> str:
-#         return SnowflakeGenerator.encode_base62(node_id)
-
-#     @staticmethod
-#     def from_global_id(global_id: str) -> int:
-#         return SnowflakeGenerator.decode_base62(global_id)
-
-
-@strawberry.type
-class Workspace:
+@strawberry.type(name="Workspace")
+class WorkspaceNode(relay.Node):
     id: relay.NodeID[int]
     name: str
-    google_place_id: str
+    google_place_id: Optional[str] = None
+
+    # ---- Node resolver ----
+    @classmethod
+    async def resolve_nodes(
+        cls,
+        *,
+        info: strawberry.Info[Context],
+        node_ids: Iterable[str],
+        required: bool = False,
+    ):
+        micro_ids = [int(nid) for nid in node_ids]
+        loader = info.context.workspace_loader
+        workspaces = await loader.load_many(micro_ids)
+        print(f"Resolved workspaces: {workspaces}")
+        return [map_to_dataclass(WorkspaceNode, ws) for ws in workspaces]

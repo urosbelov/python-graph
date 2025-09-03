@@ -1,10 +1,23 @@
+from typing import Iterable, Optional
 import strawberry
+from strawberry import relay
 
-from app.context import Context
+from app.schema.workspace.connection import (
+    WorkspaceCustomPaginationConnection,
+)
+from app.schema.workspace.types import WorkspaceNode
+
+
+@strawberry.input
+class WorkspaceFilters:
+    name: Optional[str] = None
 
 
 @strawberry.type
-class FetchWorkspacesQueries:
-    @strawberry.field
-    def workspaces(self, info: strawberry.Info[Context]) -> str:
-        return "workspaces"
+class FetchWorkspaceQueries:
+    node: relay.Node = relay.node()
+
+    @relay.connection(WorkspaceCustomPaginationConnection)
+    def workspaces(self) -> Iterable[WorkspaceNode]:
+        # You can return an empty list because resolve_connection fetches from microservice
+        return []

@@ -21,7 +21,7 @@ class Context(BaseContext):
 
     @cached_property
     def workspace_loader(self):
-        return workspace_loader()
+        return workspace_loader
 
 
 async def get_context() -> Context:
