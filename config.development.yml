@@ -3,3 +3,7 @@ environment: development
 http:
   host: 0.0.0.0
   port: 8000
+
+clients:
+  identity: "http://0.0.0.0:4006"
+  workspace: "http://0.0.0.0:4001"

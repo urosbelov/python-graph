@@ -1,10 +1,41 @@
 import strawberry
 
-from app.schema.workspace.resolvers import WorkspaceQuery, WorkspaceMutation
+# ----------
+# MAIN
+# ----------
+from app.schema.user import UserQueries, UserMutations
+from app.schema.workspace import WorkspaceQueries, WorkspaceMutations
+
+# ----------
+# SOCIAL
+# ----------
+from app.schema.post import PostQueries, PostMutations
+
+# ----------
+# MEDIA
+# ----------
+from app.schema.media.queries import MediaQueries
+
+# ----------
+# GEOSPATIAL
+# ----------
+from app.schema.bbox.queries import BBoxQueries
 
 
-# Dynamically combine queries and mutations
-Query = type("Query", (WorkspaceQuery,), {})
-Mutation = type("Mutation", (WorkspaceMutation,), {})
+@strawberry.type
+class Query(
+    UserQueries,
+    WorkspaceQueries,
+    PostQueries,
+    MediaQueries,
+    BBoxQueries,
+):
+    pass
+
+
+@strawberry.type
+class Mutation(UserMutations, WorkspaceMutations, PostMutations):
+    pass
+
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)

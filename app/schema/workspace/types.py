@@ -1,27 +1,42 @@
-from typing import Iterable, Optional
+from datetime import datetime
+import enum
+from typing import List, Optional
 import strawberry
-from strawberry import relay
-from app.context import Context
-from app.schema.workspace.service import map_to_dataclass
+
+from app.schema.workspace import resolvers
+from app.schema.workspace.feature.types import WorkspaceFeature
 
 
-@strawberry.type(name="Workspace")
-class WorkspaceNode(relay.Node):
-    id: relay.NodeID[int]
+@strawberry.enum
+class WorkspaceType(enum.Enum):
+    UNSPECIFIED = "UNSPECIFIED"
+    PERSONAL = "PERSONAL"
+    ORGANIZATION = "ORGANIZATION"
+
+
+@strawberry.enum
+class WorkspaceStatus(enum.Enum):
+    DRAFT = "DRAFT"
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+    SUSPENDED = "SUSPENDED"
+
+
+@strawberry.type
+class Workspace:
+    id: strawberry.ID
+    type: WorkspaceType
+    status: WorkspaceStatus
     name: str
-    google_place_id: Optional[str] = None
-
-    # ---- Node resolver ----
-    @classmethod
-    async def resolve_nodes(
-        cls,
-        *,
-        info: strawberry.Info[Context],
-        node_ids: Iterable[str],
-        required: bool = False,
-    ):
-        micro_ids = [int(nid) for nid in node_ids]
-        loader = info.context.workspace_loader
-        workspaces = await loader.load_many(micro_ids)
-        print(f"Resolved workspaces: {workspaces}")
-        return [map_to_dataclass(WorkspaceNode, ws) for ws in workspaces]
+    handle: str
+    description: Optional[str]
+    category_id: Optional[int]
+    updated_at: datetime
+    created_at: datetime
+    deleted_at: Optional[datetime]
+    avatar_id: Optional[str]
+    cover_id: Optional[str]
+    formatted_address: Optional[str]
+    features: Optional[List[WorkspaceFeature]] = strawberry.field(
+        resolver=resolvers.get_workspace_features
+    )
