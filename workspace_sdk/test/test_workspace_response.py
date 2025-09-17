@@ -36,8 +36,9 @@ class TestWorkspaceResponse(unittest.TestCase):
         if include_optional:
             return WorkspaceResponse(
                 id = 56,
-                type = 0,
-                status = 0,
+                key = '',
+                type = 'unspecified',
+                status = 'draft',
                 name = '',
                 handle = '',
                 category_id = 56,
@@ -45,11 +46,14 @@ class TestWorkspaceResponse(unittest.TestCase):
                 cover_id = '',
                 formatted_address = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                deleted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                deleted_by = ''
             )
         else:
             return WorkspaceResponse(
                 id = 56,
+                key = '',
                 name = '',
                 handle = '',
                 category_id = 56,

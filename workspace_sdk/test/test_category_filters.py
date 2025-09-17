@@ -14,10 +14,10 @@
 
 import unittest
 
-from workspace_sdk.models.batch_amenity_check_request import BatchAmenityCheckRequest
+from workspace_sdk.models.category_filters import CategoryFilters
 
-class TestBatchAmenityCheckRequest(unittest.TestCase):
-    """BatchAmenityCheckRequest unit test stubs"""
+class TestCategoryFilters(unittest.TestCase):
+    """CategoryFilters unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,32 +25,25 @@ class TestBatchAmenityCheckRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> BatchAmenityCheckRequest:
-        """Test BatchAmenityCheckRequest
+    def make_instance(self, include_optional) -> CategoryFilters:
+        """Test CategoryFilters
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `BatchAmenityCheckRequest`
+        # uncomment below to create an instance of `CategoryFilters`
         """
-        model = BatchAmenityCheckRequest()
+        model = CategoryFilters()
         if include_optional:
-            return BatchAmenityCheckRequest(
-                workspace_id = 56,
-                amenity_ids = [
-                    56
-                    ]
+            return CategoryFilters(
+                name = ''
             )
         else:
-            return BatchAmenityCheckRequest(
-                workspace_id = 56,
-                amenity_ids = [
-                    56
-                    ],
+            return CategoryFilters(
         )
         """
 
-    def testBatchAmenityCheckRequest(self):
-        """Test BatchAmenityCheckRequest"""
+    def testCategoryFilters(self):
+        """Test CategoryFilters"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

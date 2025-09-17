@@ -4,7 +4,7 @@ if __import__("typing").TYPE_CHECKING:
     # import apis into api package
     from workspace_sdk.api.amenities_api import AmenitiesApi
     from workspace_sdk.api.categories_api import CategoriesApi
-    from workspace_sdk.api.v1_api import V1Api
+    from workspace_sdk.api.features_api import FeaturesApi
     from workspace_sdk.api.workspaces_api import WorkspacesApi
     
 else:
@@ -16,7 +16,7 @@ else:
             """# import apis into api package
 from workspace_sdk.api.amenities_api import AmenitiesApi
 from workspace_sdk.api.categories_api import CategoriesApi
-from workspace_sdk.api.v1_api import V1Api
+from workspace_sdk.api.features_api import FeaturesApi
 from workspace_sdk.api.workspaces_api import WorkspacesApi
 
 """,

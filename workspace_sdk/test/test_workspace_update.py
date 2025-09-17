@@ -35,14 +35,12 @@ class TestWorkspaceUpdate(unittest.TestCase):
         model = WorkspaceUpdate()
         if include_optional:
             return WorkspaceUpdate(
-                type = 0,
-                status = 0,
+                type = 'unspecified',
                 name = '',
                 description = '',
                 avatar_id = '',
                 cover_id = '',
-                formatted_address = '',
-                deleted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                formatted_address = ''
             )
         else:
             return WorkspaceUpdate(

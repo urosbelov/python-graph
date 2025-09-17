@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **filters** | [**AmenityFilters**](AmenityFilters.md) |  | [optional] 
-**pagination** | [**PaginationRequest**](PaginationRequest.md) |  | [optional] 
+**pagination** | [**PageRequest**](PageRequest.md) |  | [optional] 
 
 ## Example
 

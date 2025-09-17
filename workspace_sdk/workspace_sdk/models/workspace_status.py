@@ -18,7 +18,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class WorkspaceStatus(int, Enum):
+class WorkspaceStatus(str, Enum):
     """
     WorkspaceStatus
     """
@@ -26,10 +26,11 @@ class WorkspaceStatus(int, Enum):
     """
     allowed enum values
     """
-    NUMBER_0 = 0
-    NUMBER_1 = 1
-    NUMBER_2 = 2
-    NUMBER_3 = 3
+    DRAFT = 'draft'
+    INACTIVE = 'inactive'
+    ACTIVE = 'active'
+    SUSPENDED = 'suspended'
+    DELETED = 'deleted'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -6,13 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**WorkspaceType**](WorkspaceType.md) |  | [optional] 
-**status** | [**WorkspaceStatus**](WorkspaceStatus.md) |  | [optional] 
 **name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
 **avatar_id** | **str** |  | [optional] 
 **cover_id** | **str** |  | [optional] 
 **formatted_address** | **str** |  | [optional] 
-**deleted_at** | **datetime** |  | [optional] 
 
 ## Example
 

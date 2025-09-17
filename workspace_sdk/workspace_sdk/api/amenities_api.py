@@ -329,7 +329,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/amenities/batch',
+            resource_path='/amenities/batch',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -632,7 +632,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/amenities/',
+            resource_path='/amenities/',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -922,7 +922,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/amenities/{amenity_id}',
+            resource_path='/amenities/{amenity_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -941,9 +941,9 @@ class AmenitiesApi:
     @validate_call
     def list_amenities(
         self,
-        list_amenities_request: ListAmenitiesRequest,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        list_amenities_request: Optional[ListAmenitiesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -960,12 +960,12 @@ class AmenitiesApi:
         """List Amenities
 
 
-        :param list_amenities_request: (required)
-        :type list_amenities_request: ListAmenitiesRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param list_amenities_request:
+        :type list_amenities_request: ListAmenitiesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -989,9 +989,9 @@ class AmenitiesApi:
         """ # noqa: E501
 
         _param = self._list_amenities_serialize(
-            list_amenities_request=list_amenities_request,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            list_amenities_request=list_amenities_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1016,9 +1016,9 @@ class AmenitiesApi:
     @validate_call
     def list_amenities_with_http_info(
         self,
-        list_amenities_request: ListAmenitiesRequest,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        list_amenities_request: Optional[ListAmenitiesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1035,12 +1035,12 @@ class AmenitiesApi:
         """List Amenities
 
 
-        :param list_amenities_request: (required)
-        :type list_amenities_request: ListAmenitiesRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param list_amenities_request:
+        :type list_amenities_request: ListAmenitiesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1064,9 +1064,9 @@ class AmenitiesApi:
         """ # noqa: E501
 
         _param = self._list_amenities_serialize(
-            list_amenities_request=list_amenities_request,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            list_amenities_request=list_amenities_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1091,9 +1091,9 @@ class AmenitiesApi:
     @validate_call
     def list_amenities_without_preload_content(
         self,
-        list_amenities_request: ListAmenitiesRequest,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        list_amenities_request: Optional[ListAmenitiesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1110,12 +1110,12 @@ class AmenitiesApi:
         """List Amenities
 
 
-        :param list_amenities_request: (required)
-        :type list_amenities_request: ListAmenitiesRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param list_amenities_request:
+        :type list_amenities_request: ListAmenitiesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1139,9 +1139,9 @@ class AmenitiesApi:
         """ # noqa: E501
 
         _param = self._list_amenities_serialize(
-            list_amenities_request=list_amenities_request,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            list_amenities_request=list_amenities_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1161,9 +1161,9 @@ class AmenitiesApi:
 
     def _list_amenities_serialize(
         self,
-        list_amenities_request,
         x_user_id,
         x_workspace_id,
+        list_amenities_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1225,7 +1225,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/amenities/list',
+            resource_path='/amenities/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1543,7 +1543,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/amenities/{amenity_id}',
+            resource_path='/amenities/{amenity_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

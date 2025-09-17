@@ -3,11 +3,11 @@
 
 ## Enum
 
-* `NUMBER_0` (value: `0`)
+* `INACTIVE` (value: `'inactive'`)
 
-* `NUMBER_1` (value: `1`)
+* `ACTIVE` (value: `'active'`)
 
-* `NUMBER_2` (value: `2`)
+* `DEPRECATED` (value: `'deprecated'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -31,6 +31,7 @@ class WorkspaceResponse(BaseModel):
     WorkspaceResponse
     """ # noqa: E501
     id: StrictInt
+    key: StrictStr
     type: Optional[WorkspaceType] = None
     status: Optional[WorkspaceStatus] = None
     name: StrictStr
@@ -41,7 +42,9 @@ class WorkspaceResponse(BaseModel):
     formatted_address: Optional[StrictStr] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "type", "status", "name", "handle", "category_id", "avatar_id", "cover_id", "formatted_address", "created_at", "updated_at"]
+    deleted_at: Optional[datetime] = None
+    deleted_by: Optional[UUID] = None
+    __properties: ClassVar[List[str]] = ["id", "key", "type", "status", "name", "handle", "category_id", "avatar_id", "cover_id", "formatted_address", "created_at", "updated_at", "deleted_at", "deleted_by"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,6 +110,16 @@ class WorkspaceResponse(BaseModel):
         if self.updated_at is None and "updated_at" in self.model_fields_set:
             _dict['updated_at'] = None
 
+        # set to None if deleted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_at is None and "deleted_at" in self.model_fields_set:
+            _dict['deleted_at'] = None
+
+        # set to None if deleted_by (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_by is None and "deleted_by" in self.model_fields_set:
+            _dict['deleted_by'] = None
+
         return _dict
 
     @classmethod
@@ -120,6 +133,7 @@ class WorkspaceResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "key": obj.get("key"),
             "type": obj.get("type"),
             "status": obj.get("status"),
             "name": obj.get("name"),
@@ -129,7 +143,9 @@ class WorkspaceResponse(BaseModel):
             "cover_id": obj.get("cover_id"),
             "formatted_address": obj.get("formatted_address"),
             "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
+            "updated_at": obj.get("updated_at"),
+            "deleted_at": obj.get("deleted_at"),
+            "deleted_by": obj.get("deleted_by")
         })
         return _obj
 

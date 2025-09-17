@@ -17,12 +17,16 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictBool, StrictInt, StrictStr
-from typing import Dict, List, Optional
+from typing import List, Optional
 from uuid import UUID
-from workspace_sdk.models.batch_amenity_check_request import BatchAmenityCheckRequest
 from workspace_sdk.models.batch_workspaces_request import BatchWorkspacesRequest
+from workspace_sdk.models.batch_workspaces_response import BatchWorkspacesResponse
+from workspace_sdk.models.list_workspaces_request import ListWorkspacesRequest
+from workspace_sdk.models.list_workspaces_response import ListWorkspacesResponse
+from workspace_sdk.models.workspace_b_box_query import WorkspaceBBoxQuery
 from workspace_sdk.models.workspace_create import WorkspaceCreate
 from workspace_sdk.models.workspace_response import WorkspaceResponse
+from workspace_sdk.models.workspace_status_update import WorkspaceStatusUpdate
 from workspace_sdk.models.workspace_update import WorkspaceUpdate
 
 from workspace_sdk.api_client import ApiClient, RequestSerialized
@@ -44,601 +48,6 @@ class WorkspacesApi:
 
 
     @validate_call
-    def activate_workspace(
-        self,
-        workspace_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Activate Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._activate_workspace_serialize(
-            workspace_id=workspace_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def activate_workspace_with_http_info(
-        self,
-        workspace_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Activate Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._activate_workspace_serialize(
-            workspace_id=workspace_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def activate_workspace_without_preload_content(
-        self,
-        workspace_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Activate Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._activate_workspace_serialize(
-            workspace_id=workspace_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _activate_workspace_serialize(
-        self,
-        workspace_id,
-        x_user_id,
-        x_workspace_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if workspace_id is not None:
-            _path_params['workspace_id'] = workspace_id
-        # process the query parameters
-        # process the header parameters
-        if x_user_id is not None:
-            _header_params['X-User-Id'] = x_user_id
-        if x_workspace_id is not None:
-            _header_params['X-Workspace-Id'] = x_workspace_id
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/api/v1/workspaces/{workspace_id}/activate',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def add_amenity_to_workspace(
-        self,
-        workspace_id: StrictInt,
-        amenity_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Add Amenity To Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param amenity_id: (required)
-        :type amenity_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._add_amenity_to_workspace_serialize(
-            workspace_id=workspace_id,
-            amenity_id=amenity_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def add_amenity_to_workspace_with_http_info(
-        self,
-        workspace_id: StrictInt,
-        amenity_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Add Amenity To Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param amenity_id: (required)
-        :type amenity_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._add_amenity_to_workspace_serialize(
-            workspace_id=workspace_id,
-            amenity_id=amenity_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def add_amenity_to_workspace_without_preload_content(
-        self,
-        workspace_id: StrictInt,
-        amenity_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Add Amenity To Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param amenity_id: (required)
-        :type amenity_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._add_amenity_to_workspace_serialize(
-            workspace_id=workspace_id,
-            amenity_id=amenity_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _add_amenity_to_workspace_serialize(
-        self,
-        workspace_id,
-        amenity_id,
-        x_user_id,
-        x_workspace_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if workspace_id is not None:
-            _path_params['workspace_id'] = workspace_id
-        if amenity_id is not None:
-            _path_params['amenity_id'] = amenity_id
-        # process the query parameters
-        # process the header parameters
-        if x_user_id is not None:
-            _header_params['X-User-Id'] = x_user_id
-        if x_workspace_id is not None:
-            _header_params['X-Workspace-Id'] = x_workspace_id
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/workspaces/{workspace_id}/amenities/{amenity_id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def batch_workspaces(
         self,
         batch_workspaces_request: BatchWorkspacesRequest,
@@ -656,7 +65,7 @@ class WorkspacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[WorkspaceResponse]:
+    ) -> BatchWorkspacesResponse:
         """Get Workspaces By Ids
 
 
@@ -699,7 +108,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[WorkspaceResponse]",
+            '200': "BatchWorkspacesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -731,7 +140,7 @@ class WorkspacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[WorkspaceResponse]]:
+    ) -> ApiResponse[BatchWorkspacesResponse]:
         """Get Workspaces By Ids
 
 
@@ -774,7 +183,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[WorkspaceResponse]",
+            '200': "BatchWorkspacesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -849,7 +258,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[WorkspaceResponse]",
+            '200': "BatchWorkspacesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -925,7 +334,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/workspaces/batch',
+            resource_path='/workspaces/batch',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -942,11 +351,11 @@ class WorkspacesApi:
 
 
     @validate_call
-    def check_amenities_enabled(
+    def bbox_query(
         self,
-        batch_amenity_check_request: BatchAmenityCheckRequest,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        workspace_b_box_query: Optional[WorkspaceBBoxQuery] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -959,16 +368,16 @@ class WorkspacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, bool]:
-        """Check Amenities Enabled
+    ) -> List[WorkspaceResponse]:
+        """Bbox Query
 
 
-        :param batch_amenity_check_request: (required)
-        :type batch_amenity_check_request: BatchAmenityCheckRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param workspace_b_box_query:
+        :type workspace_b_box_query: WorkspaceBBoxQuery
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -991,10 +400,10 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_amenities_enabled_serialize(
-            batch_amenity_check_request=batch_amenity_check_request,
+        _param = self._bbox_query_serialize(
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            workspace_b_box_query=workspace_b_box_query,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1002,7 +411,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, bool]",
+            '200': "List[WorkspaceResponse]",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1017,11 +426,11 @@ class WorkspacesApi:
 
 
     @validate_call
-    def check_amenities_enabled_with_http_info(
+    def bbox_query_with_http_info(
         self,
-        batch_amenity_check_request: BatchAmenityCheckRequest,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        workspace_b_box_query: Optional[WorkspaceBBoxQuery] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1034,16 +443,16 @@ class WorkspacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, bool]]:
-        """Check Amenities Enabled
+    ) -> ApiResponse[List[WorkspaceResponse]]:
+        """Bbox Query
 
 
-        :param batch_amenity_check_request: (required)
-        :type batch_amenity_check_request: BatchAmenityCheckRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param workspace_b_box_query:
+        :type workspace_b_box_query: WorkspaceBBoxQuery
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1066,10 +475,10 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_amenities_enabled_serialize(
-            batch_amenity_check_request=batch_amenity_check_request,
+        _param = self._bbox_query_serialize(
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            workspace_b_box_query=workspace_b_box_query,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1077,7 +486,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, bool]",
+            '200': "List[WorkspaceResponse]",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1092,11 +501,11 @@ class WorkspacesApi:
 
 
     @validate_call
-    def check_amenities_enabled_without_preload_content(
+    def bbox_query_without_preload_content(
         self,
-        batch_amenity_check_request: BatchAmenityCheckRequest,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        workspace_b_box_query: Optional[WorkspaceBBoxQuery] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1110,15 +519,15 @@ class WorkspacesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Check Amenities Enabled
+        """Bbox Query
 
 
-        :param batch_amenity_check_request: (required)
-        :type batch_amenity_check_request: BatchAmenityCheckRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param workspace_b_box_query:
+        :type workspace_b_box_query: WorkspaceBBoxQuery
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1141,10 +550,10 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_amenities_enabled_serialize(
-            batch_amenity_check_request=batch_amenity_check_request,
+        _param = self._bbox_query_serialize(
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            workspace_b_box_query=workspace_b_box_query,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1152,7 +561,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, bool]",
+            '200': "List[WorkspaceResponse]",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1162,11 +571,11 @@ class WorkspacesApi:
         return response_data.response
 
 
-    def _check_amenities_enabled_serialize(
+    def _bbox_query_serialize(
         self,
-        batch_amenity_check_request,
         x_user_id,
         x_workspace_id,
+        workspace_b_box_query,
         _request_auth,
         _content_type,
         _headers,
@@ -1196,8 +605,8 @@ class WorkspacesApi:
             _header_params['X-Workspace-Id'] = x_workspace_id
         # process the form parameters
         # process the body parameter
-        if batch_amenity_check_request is not None:
-            _body_params = batch_amenity_check_request
+        if workspace_b_box_query is not None:
+            _body_params = workspace_b_box_query
 
 
         # set the HTTP header `Accept`
@@ -1228,7 +637,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/workspaces/amenities/check',
+            resource_path='/workspaces/bbox',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1531,7 +940,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/workspaces/',
+            resource_path='/workspaces/',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1548,7 +957,7 @@ class WorkspacesApi:
 
 
     @validate_call
-    def deactivate_workspace(
+    def delete_workspace(
         self,
         workspace_id: StrictInt,
         x_user_id: Optional[UUID] = None,
@@ -1566,7 +975,7 @@ class WorkspacesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Deactivate Workspace
+        """Delete Workspace
 
 
         :param workspace_id: (required)
@@ -1597,7 +1006,7 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._deactivate_workspace_serialize(
+        _param = self._delete_workspace_serialize(
             workspace_id=workspace_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
@@ -1623,7 +1032,7 @@ class WorkspacesApi:
 
 
     @validate_call
-    def deactivate_workspace_with_http_info(
+    def delete_workspace_with_http_info(
         self,
         workspace_id: StrictInt,
         x_user_id: Optional[UUID] = None,
@@ -1641,7 +1050,7 @@ class WorkspacesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Deactivate Workspace
+        """Delete Workspace
 
 
         :param workspace_id: (required)
@@ -1672,7 +1081,7 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._deactivate_workspace_serialize(
+        _param = self._delete_workspace_serialize(
             workspace_id=workspace_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
@@ -1698,7 +1107,7 @@ class WorkspacesApi:
 
 
     @validate_call
-    def deactivate_workspace_without_preload_content(
+    def delete_workspace_without_preload_content(
         self,
         workspace_id: StrictInt,
         x_user_id: Optional[UUID] = None,
@@ -1716,7 +1125,7 @@ class WorkspacesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Deactivate Workspace
+        """Delete Workspace
 
 
         :param workspace_id: (required)
@@ -1747,7 +1156,7 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._deactivate_workspace_serialize(
+        _param = self._delete_workspace_serialize(
             workspace_id=workspace_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
@@ -1768,7 +1177,7 @@ class WorkspacesApi:
         return response_data.response
 
 
-    def _deactivate_workspace_serialize(
+    def _delete_workspace_serialize(
         self,
         workspace_id,
         x_user_id,
@@ -1820,8 +1229,8 @@ class WorkspacesApi:
         ]
 
         return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/api/v1/workspaces/{workspace_id}/deactivate',
+            method='DELETE',
+            resource_path='/workspaces/{workspace_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2111,7 +1520,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/workspaces/{workspace_id}',
+            resource_path='/workspaces/{workspace_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2401,7 +1810,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/workspaces/handle/{handle}',
+            resource_path='/workspaces/handle/{handle}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2418,12 +1827,11 @@ class WorkspacesApi:
 
 
     @validate_call
-    def remove_amenity_from_workspace(
+    def list_workspaces(
         self,
-        workspace_id: StrictInt,
-        amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        list_workspaces_request: Optional[ListWorkspacesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2436,18 +1844,16 @@ class WorkspacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Remove Amenity From Workspace
+    ) -> ListWorkspacesResponse:
+        """List Workspaces
 
 
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param amenity_id: (required)
-        :type amenity_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param list_workspaces_request:
+        :type list_workspaces_request: ListWorkspacesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2470,11 +1876,10 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_amenity_from_workspace_serialize(
-            workspace_id=workspace_id,
-            amenity_id=amenity_id,
+        _param = self._list_workspaces_serialize(
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            list_workspaces_request=list_workspaces_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2482,7 +1887,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "ListWorkspacesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2497,12 +1902,11 @@ class WorkspacesApi:
 
 
     @validate_call
-    def remove_amenity_from_workspace_with_http_info(
+    def list_workspaces_with_http_info(
         self,
-        workspace_id: StrictInt,
-        amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        list_workspaces_request: Optional[ListWorkspacesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2515,18 +1919,16 @@ class WorkspacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Remove Amenity From Workspace
+    ) -> ApiResponse[ListWorkspacesResponse]:
+        """List Workspaces
 
 
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param amenity_id: (required)
-        :type amenity_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param list_workspaces_request:
+        :type list_workspaces_request: ListWorkspacesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2549,11 +1951,10 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_amenity_from_workspace_serialize(
-            workspace_id=workspace_id,
-            amenity_id=amenity_id,
+        _param = self._list_workspaces_serialize(
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            list_workspaces_request=list_workspaces_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2561,7 +1962,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "ListWorkspacesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2576,12 +1977,11 @@ class WorkspacesApi:
 
 
     @validate_call
-    def remove_amenity_from_workspace_without_preload_content(
+    def list_workspaces_without_preload_content(
         self,
-        workspace_id: StrictInt,
-        amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictInt] = None,
+        list_workspaces_request: Optional[ListWorkspacesRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2595,17 +1995,15 @@ class WorkspacesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove Amenity From Workspace
+        """List Workspaces
 
 
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param amenity_id: (required)
-        :type amenity_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
         :type x_workspace_id: int
+        :param list_workspaces_request:
+        :type list_workspaces_request: ListWorkspacesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2628,11 +2026,10 @@ class WorkspacesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_amenity_from_workspace_serialize(
-            workspace_id=workspace_id,
-            amenity_id=amenity_id,
+        _param = self._list_workspaces_serialize(
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
+            list_workspaces_request=list_workspaces_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2640,7 +2037,7 @@ class WorkspacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "ListWorkspacesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2650,12 +2047,11 @@ class WorkspacesApi:
         return response_data.response
 
 
-    def _remove_amenity_from_workspace_serialize(
+    def _list_workspaces_serialize(
         self,
-        workspace_id,
-        amenity_id,
         x_user_id,
         x_workspace_id,
+        list_workspaces_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2677,10 +2073,6 @@ class WorkspacesApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if workspace_id is not None:
-            _path_params['workspace_id'] = workspace_id
-        if amenity_id is not None:
-            _path_params['amenity_id'] = amenity_id
         # process the query parameters
         # process the header parameters
         if x_user_id is not None:
@@ -2689,6 +2081,8 @@ class WorkspacesApi:
             _header_params['X-Workspace-Id'] = x_workspace_id
         # process the form parameters
         # process the body parameter
+        if list_workspaces_request is not None:
+            _body_params = list_workspaces_request
 
 
         # set the HTTP header `Accept`
@@ -2699,6 +2093,19 @@ class WorkspacesApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -2706,297 +2113,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/api/v1/workspaces/{workspace_id}/amenities/{amenity_id}/remove',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def suspend_workspace(
-        self,
-        workspace_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Suspend Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._suspend_workspace_serialize(
-            workspace_id=workspace_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def suspend_workspace_with_http_info(
-        self,
-        workspace_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Suspend Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._suspend_workspace_serialize(
-            workspace_id=workspace_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def suspend_workspace_without_preload_content(
-        self,
-        workspace_id: StrictInt,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Suspend Workspace
-
-
-        :param workspace_id: (required)
-        :type workspace_id: int
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._suspend_workspace_serialize(
-            workspace_id=workspace_id,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _suspend_workspace_serialize(
-        self,
-        workspace_id,
-        x_user_id,
-        x_workspace_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if workspace_id is not None:
-            _path_params['workspace_id'] = workspace_id
-        # process the query parameters
-        # process the header parameters
-        if x_user_id is not None:
-            _header_params['X-User-Id'] = x_user_id
-        if x_workspace_id is not None:
-            _header_params['X-Workspace-Id'] = x_workspace_id
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/api/v1/workspaces/{workspace_id}/suspend',
+            resource_path='/workspaces/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3314,7 +2431,325 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/api/v1/workspaces/{workspace_id}',
+            resource_path='/workspaces/{workspace_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_workspace_status(
+        self,
+        workspace_id: StrictInt,
+        workspace_status_update: WorkspaceStatusUpdate,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> WorkspaceResponse:
+        """Update Workspace Status
+
+
+        :param workspace_id: (required)
+        :type workspace_id: int
+        :param workspace_status_update: (required)
+        :type workspace_status_update: WorkspaceStatusUpdate
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workspace_status_serialize(
+            workspace_id=workspace_id,
+            workspace_status_update=workspace_status_update,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WorkspaceResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_workspace_status_with_http_info(
+        self,
+        workspace_id: StrictInt,
+        workspace_status_update: WorkspaceStatusUpdate,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[WorkspaceResponse]:
+        """Update Workspace Status
+
+
+        :param workspace_id: (required)
+        :type workspace_id: int
+        :param workspace_status_update: (required)
+        :type workspace_status_update: WorkspaceStatusUpdate
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workspace_status_serialize(
+            workspace_id=workspace_id,
+            workspace_status_update=workspace_status_update,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WorkspaceResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_workspace_status_without_preload_content(
+        self,
+        workspace_id: StrictInt,
+        workspace_status_update: WorkspaceStatusUpdate,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Workspace Status
+
+
+        :param workspace_id: (required)
+        :type workspace_id: int
+        :param workspace_status_update: (required)
+        :type workspace_status_update: WorkspaceStatusUpdate
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workspace_status_serialize(
+            workspace_id=workspace_id,
+            workspace_status_update=workspace_status_update,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WorkspaceResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_workspace_status_serialize(
+        self,
+        workspace_id,
+        workspace_status_update,
+        x_user_id,
+        x_workspace_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspace_id'] = workspace_id
+        # process the query parameters
+        # process the header parameters
+        if x_user_id is not None:
+            _header_params['X-User-Id'] = x_user_id
+        if x_workspace_id is not None:
+            _header_params['X-Workspace-Id'] = x_workspace_id
+        # process the form parameters
+        # process the body parameter
+        if workspace_status_update is not None:
+            _body_params = workspace_status_update
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/workspaces/{workspace_id}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3604,7 +3039,7 @@ class WorkspacesApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/workspaces/{workspace_id}/exist',
+            resource_path='/workspaces/{workspace_id}/exist',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

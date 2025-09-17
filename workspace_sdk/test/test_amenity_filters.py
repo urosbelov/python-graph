@@ -36,7 +36,7 @@ class TestAmenityFilters(unittest.TestCase):
         if include_optional:
             return AmenityFilters(
                 name = '',
-                status = 0
+                status = 'inactive'
             )
         else:
             return AmenityFilters(

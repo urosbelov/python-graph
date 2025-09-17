@@ -37,11 +37,10 @@ class TestListAmenitiesRequest(unittest.TestCase):
             return ListAmenitiesRequest(
                 filters = workspace_sdk.models.amenity_filters.AmenityFilters(
                     name = '', 
-                    status = 0, ),
-                pagination = workspace_sdk.models.pagination_request.PaginationRequest(
-                    limit = 56, 
-                    cursor = '', 
-                    direction = '', )
+                    status = 'inactive', ),
+                pagination = workspace_sdk.models.page_request.PageRequest(
+                    page = 56, 
+                    size = 56, )
             )
         else:
             return ListAmenitiesRequest(

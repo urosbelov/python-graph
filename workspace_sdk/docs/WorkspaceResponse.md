@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
+**key** | **str** |  | 
 **type** | [**WorkspaceType**](WorkspaceType.md) |  | [optional] 
 **status** | [**WorkspaceStatus**](WorkspaceStatus.md) |  | [optional] 
 **name** | **str** |  | 
@@ -16,6 +17,8 @@ Name | Type | Description | Notes
 **formatted_address** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** |  | [optional] 
+**deleted_by** | **str** |  | [optional] 
 
 ## Example
 

@@ -18,7 +18,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class WorkspaceType(int, Enum):
+class WorkspaceType(str, Enum):
     """
     WorkspaceType
     """
@@ -26,9 +26,9 @@ class WorkspaceType(int, Enum):
     """
     allowed enum values
     """
-    NUMBER_0 = 0
-    NUMBER_1 = 1
-    NUMBER_2 = 2
+    UNSPECIFIED = 'unspecified'
+    PERSONAL = 'personal'
+    ORGANIZATION = 'organization'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

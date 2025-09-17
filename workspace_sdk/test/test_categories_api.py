@@ -26,13 +26,6 @@ class TestCategoriesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_activate_amenity_in_category_api_v1_categories_category_id_amenities_amenity_id_activate_put(self) -> None:
-        """Test case for activate_amenity_in_category_api_v1_categories_category_id_amenities_amenity_id_activate_put
-
-        Activate Amenity In Category
-        """
-        pass
-
     def test_add_amenity_to_category(self) -> None:
         """Test case for add_amenity_to_category
 
@@ -54,20 +47,6 @@ class TestCategoriesApi(unittest.TestCase):
         """
         pass
 
-    def test_deactivate_amenity_in_category_api_v1_categories_category_id_amenities_amenity_id_deactivate_put(self) -> None:
-        """Test case for deactivate_amenity_in_category_api_v1_categories_category_id_amenities_amenity_id_deactivate_put
-
-        Deactivate Amenity In Category
-        """
-        pass
-
-    def test_deprecate_amenity_in_category_api_v1_categories_category_id_amenities_amenity_id_deprecate_put(self) -> None:
-        """Test case for deprecate_amenity_in_category_api_v1_categories_category_id_amenities_amenity_id_deprecate_put
-
-        Deprecate Amenity In Category
-        """
-        pass
-
     def test_get_category(self) -> None:
         """Test case for get_category
 
@@ -75,8 +54,8 @@ class TestCategoriesApi(unittest.TestCase):
         """
         pass
 
-    def test_list_amenities_in_category_api_v1_categories_category_id_amenities_get(self) -> None:
-        """Test case for list_amenities_in_category_api_v1_categories_category_id_amenities_get
+    def test_list_amenities_in_category_categories_category_id_amenities_get(self) -> None:
+        """Test case for list_amenities_in_category_categories_category_id_amenities_get
 
         List Amenities In Category
         """
@@ -86,6 +65,13 @@ class TestCategoriesApi(unittest.TestCase):
         """Test case for list_categories
 
         List Categories
+        """
+        pass
+
+    def test_update_amenity_in_category(self) -> None:
+        """Test case for update_amenity_in_category
+
+        Update Amenity In Category
         """
         pass
 

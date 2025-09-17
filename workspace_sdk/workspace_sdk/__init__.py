@@ -20,7 +20,7 @@ __version__ = "1.0.0"
 __all__ = [
     "AmenitiesApi",
     "CategoriesApi",
-    "V1Api",
+    "FeaturesApi",
     "WorkspacesApi",
     "ApiResponse",
     "ApiClient",
@@ -36,20 +36,38 @@ __all__ = [
     "AmenityStatus",
     "AmenityType",
     "AmenityUpdate",
+    "BBox",
     "BatchAmenitiesRequest",
-    "BatchAmenityCheckRequest",
     "BatchCategoriesRequest",
+    "BatchFeaturesRequest",
+    "BatchFeaturesResponse",
     "BatchWorkspacesRequest",
+    "BatchWorkspacesResponse",
+    "CategoryAmenityStatus",
     "CategoryCreate",
+    "CategoryFilters",
     "CategoryUpdate",
+    "CreateFeatureRequest",
+    "FeatureResponse",
+    "FeatureStatus",
     "HTTPValidationError",
+    "LatLng",
     "ListAmenitiesRequest",
-    "PaginationRequest",
+    "ListCategoriesRequest",
+    "ListWorkspacesRequest",
+    "ListWorkspacesResponse",
+    "PageRequest",
+    "PageResponse",
+    "UpdateCategoryAmenity",
     "ValidationError",
     "ValidationErrorLocInner",
+    "WorkspaceBBoxFilters",
+    "WorkspaceBBoxQuery",
     "WorkspaceCreate",
+    "WorkspaceFilters",
     "WorkspaceResponse",
     "WorkspaceStatus",
+    "WorkspaceStatusUpdate",
     "WorkspaceType",
     "WorkspaceUpdate",
 ]
@@ -58,7 +76,7 @@ if __import__("typing").TYPE_CHECKING:
     # import apis into sdk package
     from workspace_sdk.api.amenities_api import AmenitiesApi as AmenitiesApi
     from workspace_sdk.api.categories_api import CategoriesApi as CategoriesApi
-    from workspace_sdk.api.v1_api import V1Api as V1Api
+    from workspace_sdk.api.features_api import FeaturesApi as FeaturesApi
     from workspace_sdk.api.workspaces_api import WorkspacesApi as WorkspacesApi
     
     # import ApiClient
@@ -78,20 +96,38 @@ if __import__("typing").TYPE_CHECKING:
     from workspace_sdk.models.amenity_status import AmenityStatus as AmenityStatus
     from workspace_sdk.models.amenity_type import AmenityType as AmenityType
     from workspace_sdk.models.amenity_update import AmenityUpdate as AmenityUpdate
+    from workspace_sdk.models.b_box import BBox as BBox
     from workspace_sdk.models.batch_amenities_request import BatchAmenitiesRequest as BatchAmenitiesRequest
-    from workspace_sdk.models.batch_amenity_check_request import BatchAmenityCheckRequest as BatchAmenityCheckRequest
     from workspace_sdk.models.batch_categories_request import BatchCategoriesRequest as BatchCategoriesRequest
+    from workspace_sdk.models.batch_features_request import BatchFeaturesRequest as BatchFeaturesRequest
+    from workspace_sdk.models.batch_features_response import BatchFeaturesResponse as BatchFeaturesResponse
     from workspace_sdk.models.batch_workspaces_request import BatchWorkspacesRequest as BatchWorkspacesRequest
+    from workspace_sdk.models.batch_workspaces_response import BatchWorkspacesResponse as BatchWorkspacesResponse
+    from workspace_sdk.models.category_amenity_status import CategoryAmenityStatus as CategoryAmenityStatus
     from workspace_sdk.models.category_create import CategoryCreate as CategoryCreate
+    from workspace_sdk.models.category_filters import CategoryFilters as CategoryFilters
     from workspace_sdk.models.category_update import CategoryUpdate as CategoryUpdate
+    from workspace_sdk.models.create_feature_request import CreateFeatureRequest as CreateFeatureRequest
+    from workspace_sdk.models.feature_response import FeatureResponse as FeatureResponse
+    from workspace_sdk.models.feature_status import FeatureStatus as FeatureStatus
     from workspace_sdk.models.http_validation_error import HTTPValidationError as HTTPValidationError
+    from workspace_sdk.models.lat_lng import LatLng as LatLng
     from workspace_sdk.models.list_amenities_request import ListAmenitiesRequest as ListAmenitiesRequest
-    from workspace_sdk.models.pagination_request import PaginationRequest as PaginationRequest
+    from workspace_sdk.models.list_categories_request import ListCategoriesRequest as ListCategoriesRequest
+    from workspace_sdk.models.list_workspaces_request import ListWorkspacesRequest as ListWorkspacesRequest
+    from workspace_sdk.models.list_workspaces_response import ListWorkspacesResponse as ListWorkspacesResponse
+    from workspace_sdk.models.page_request import PageRequest as PageRequest
+    from workspace_sdk.models.page_response import PageResponse as PageResponse
+    from workspace_sdk.models.update_category_amenity import UpdateCategoryAmenity as UpdateCategoryAmenity
     from workspace_sdk.models.validation_error import ValidationError as ValidationError
     from workspace_sdk.models.validation_error_loc_inner import ValidationErrorLocInner as ValidationErrorLocInner
+    from workspace_sdk.models.workspace_b_box_filters import WorkspaceBBoxFilters as WorkspaceBBoxFilters
+    from workspace_sdk.models.workspace_b_box_query import WorkspaceBBoxQuery as WorkspaceBBoxQuery
     from workspace_sdk.models.workspace_create import WorkspaceCreate as WorkspaceCreate
+    from workspace_sdk.models.workspace_filters import WorkspaceFilters as WorkspaceFilters
     from workspace_sdk.models.workspace_response import WorkspaceResponse as WorkspaceResponse
     from workspace_sdk.models.workspace_status import WorkspaceStatus as WorkspaceStatus
+    from workspace_sdk.models.workspace_status_update import WorkspaceStatusUpdate as WorkspaceStatusUpdate
     from workspace_sdk.models.workspace_type import WorkspaceType as WorkspaceType
     from workspace_sdk.models.workspace_update import WorkspaceUpdate as WorkspaceUpdate
     
@@ -106,7 +142,7 @@ else:
             """# import apis into sdk package
 from workspace_sdk.api.amenities_api import AmenitiesApi as AmenitiesApi
 from workspace_sdk.api.categories_api import CategoriesApi as CategoriesApi
-from workspace_sdk.api.v1_api import V1Api as V1Api
+from workspace_sdk.api.features_api import FeaturesApi as FeaturesApi
 from workspace_sdk.api.workspaces_api import WorkspacesApi as WorkspacesApi
 
 # import ApiClient
@@ -126,20 +162,38 @@ from workspace_sdk.models.amenity_filters import AmenityFilters as AmenityFilter
 from workspace_sdk.models.amenity_status import AmenityStatus as AmenityStatus
 from workspace_sdk.models.amenity_type import AmenityType as AmenityType
 from workspace_sdk.models.amenity_update import AmenityUpdate as AmenityUpdate
+from workspace_sdk.models.b_box import BBox as BBox
 from workspace_sdk.models.batch_amenities_request import BatchAmenitiesRequest as BatchAmenitiesRequest
-from workspace_sdk.models.batch_amenity_check_request import BatchAmenityCheckRequest as BatchAmenityCheckRequest
 from workspace_sdk.models.batch_categories_request import BatchCategoriesRequest as BatchCategoriesRequest
+from workspace_sdk.models.batch_features_request import BatchFeaturesRequest as BatchFeaturesRequest
+from workspace_sdk.models.batch_features_response import BatchFeaturesResponse as BatchFeaturesResponse
 from workspace_sdk.models.batch_workspaces_request import BatchWorkspacesRequest as BatchWorkspacesRequest
+from workspace_sdk.models.batch_workspaces_response import BatchWorkspacesResponse as BatchWorkspacesResponse
+from workspace_sdk.models.category_amenity_status import CategoryAmenityStatus as CategoryAmenityStatus
 from workspace_sdk.models.category_create import CategoryCreate as CategoryCreate
+from workspace_sdk.models.category_filters import CategoryFilters as CategoryFilters
 from workspace_sdk.models.category_update import CategoryUpdate as CategoryUpdate
+from workspace_sdk.models.create_feature_request import CreateFeatureRequest as CreateFeatureRequest
+from workspace_sdk.models.feature_response import FeatureResponse as FeatureResponse
+from workspace_sdk.models.feature_status import FeatureStatus as FeatureStatus
 from workspace_sdk.models.http_validation_error import HTTPValidationError as HTTPValidationError
+from workspace_sdk.models.lat_lng import LatLng as LatLng
 from workspace_sdk.models.list_amenities_request import ListAmenitiesRequest as ListAmenitiesRequest
-from workspace_sdk.models.pagination_request import PaginationRequest as PaginationRequest
+from workspace_sdk.models.list_categories_request import ListCategoriesRequest as ListCategoriesRequest
+from workspace_sdk.models.list_workspaces_request import ListWorkspacesRequest as ListWorkspacesRequest
+from workspace_sdk.models.list_workspaces_response import ListWorkspacesResponse as ListWorkspacesResponse
+from workspace_sdk.models.page_request import PageRequest as PageRequest
+from workspace_sdk.models.page_response import PageResponse as PageResponse
+from workspace_sdk.models.update_category_amenity import UpdateCategoryAmenity as UpdateCategoryAmenity
 from workspace_sdk.models.validation_error import ValidationError as ValidationError
 from workspace_sdk.models.validation_error_loc_inner import ValidationErrorLocInner as ValidationErrorLocInner
+from workspace_sdk.models.workspace_b_box_filters import WorkspaceBBoxFilters as WorkspaceBBoxFilters
+from workspace_sdk.models.workspace_b_box_query import WorkspaceBBoxQuery as WorkspaceBBoxQuery
 from workspace_sdk.models.workspace_create import WorkspaceCreate as WorkspaceCreate
+from workspace_sdk.models.workspace_filters import WorkspaceFilters as WorkspaceFilters
 from workspace_sdk.models.workspace_response import WorkspaceResponse as WorkspaceResponse
 from workspace_sdk.models.workspace_status import WorkspaceStatus as WorkspaceStatus
+from workspace_sdk.models.workspace_status_update import WorkspaceStatusUpdate as WorkspaceStatusUpdate
 from workspace_sdk.models.workspace_type import WorkspaceType as WorkspaceType
 from workspace_sdk.models.workspace_update import WorkspaceUpdate as WorkspaceUpdate
 

@@ -36,13 +36,13 @@ class TestBatchCategoriesRequest(unittest.TestCase):
         if include_optional:
             return BatchCategoriesRequest(
                 ids = [
-                    ''
+                    56
                     ]
             )
         else:
             return BatchCategoriesRequest(
                 ids = [
-                    ''
+                    56
                     ],
         )
         """

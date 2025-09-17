@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batch_amenities**](AmenitiesApi.md#batch_amenities) | **POST** /api/v1/amenities/batch | Batch Amenities
-[**create_amenity**](AmenitiesApi.md#create_amenity) | **POST** /api/v1/amenities/ | Create Amenity
-[**get_amenity**](AmenitiesApi.md#get_amenity) | **GET** /api/v1/amenities/{amenity_id} | Get Amenity
-[**list_amenities**](AmenitiesApi.md#list_amenities) | **POST** /api/v1/amenities/list | List Amenities
-[**update_amenity**](AmenitiesApi.md#update_amenity) | **PUT** /api/v1/amenities/{amenity_id} | Update Amenity
+[**batch_amenities**](AmenitiesApi.md#batch_amenities) | **POST** /amenities/batch | Batch Amenities
+[**create_amenity**](AmenitiesApi.md#create_amenity) | **POST** /amenities/ | Create Amenity
+[**get_amenity**](AmenitiesApi.md#get_amenity) | **GET** /amenities/{amenity_id} | Get Amenity
+[**list_amenities**](AmenitiesApi.md#list_amenities) | **POST** /amenities/list | List Amenities
+[**update_amenity**](AmenitiesApi.md#update_amenity) | **PUT** /amenities/{amenity_id} | Update Amenity
 
 
 # **batch_amenities**
@@ -224,7 +224,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_amenities**
-> object list_amenities(list_amenities_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> object list_amenities(x_user_id=x_user_id, x_workspace_id=x_workspace_id, list_amenities_request=list_amenities_request)
 
 List Amenities
 
@@ -248,13 +248,13 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.AmenitiesApi(api_client)
-    list_amenities_request = workspace_sdk.ListAmenitiesRequest() # ListAmenitiesRequest | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 56 # int |  (optional)
+    list_amenities_request = workspace_sdk.ListAmenitiesRequest() # ListAmenitiesRequest |  (optional)
 
     try:
         # List Amenities
-        api_response = api_instance.list_amenities(list_amenities_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_response = api_instance.list_amenities(x_user_id=x_user_id, x_workspace_id=x_workspace_id, list_amenities_request=list_amenities_request)
         print("The response of AmenitiesApi->list_amenities:\n")
         pprint(api_response)
     except Exception as e:
@@ -268,9 +268,9 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **list_amenities_request** | [**ListAmenitiesRequest**](ListAmenitiesRequest.md)|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **int**|  | [optional] 
+ **list_amenities_request** | [**ListAmenitiesRequest**](ListAmenitiesRequest.md)|  | [optional] 
 
 ### Return type
 

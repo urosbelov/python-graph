@@ -18,7 +18,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class AmenityStatus(int, Enum):
+class AmenityStatus(str, Enum):
     """
     AmenityStatus
     """
@@ -26,9 +26,9 @@ class AmenityStatus(int, Enum):
     """
     allowed enum values
     """
-    NUMBER_0 = 0
-    NUMBER_1 = 1
-    NUMBER_2 = 2
+    INACTIVE = 'inactive'
+    ACTIVE = 'active'
+    DEPRECATED = 'deprecated'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

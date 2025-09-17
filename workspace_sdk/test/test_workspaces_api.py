@@ -26,20 +26,6 @@ class TestWorkspacesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_activate_workspace(self) -> None:
-        """Test case for activate_workspace
-
-        Activate Workspace
-        """
-        pass
-
-    def test_add_amenity_to_workspace(self) -> None:
-        """Test case for add_amenity_to_workspace
-
-        Add Amenity To Workspace
-        """
-        pass
-
     def test_batch_workspaces(self) -> None:
         """Test case for batch_workspaces
 
@@ -47,10 +33,10 @@ class TestWorkspacesApi(unittest.TestCase):
         """
         pass
 
-    def test_check_amenities_enabled(self) -> None:
-        """Test case for check_amenities_enabled
+    def test_bbox_query(self) -> None:
+        """Test case for bbox_query
 
-        Check Amenities Enabled
+        Bbox Query
         """
         pass
 
@@ -61,10 +47,10 @@ class TestWorkspacesApi(unittest.TestCase):
         """
         pass
 
-    def test_deactivate_workspace(self) -> None:
-        """Test case for deactivate_workspace
+    def test_delete_workspace(self) -> None:
+        """Test case for delete_workspace
 
-        Deactivate Workspace
+        Delete Workspace
         """
         pass
 
@@ -82,17 +68,10 @@ class TestWorkspacesApi(unittest.TestCase):
         """
         pass
 
-    def test_remove_amenity_from_workspace(self) -> None:
-        """Test case for remove_amenity_from_workspace
+    def test_list_workspaces(self) -> None:
+        """Test case for list_workspaces
 
-        Remove Amenity From Workspace
-        """
-        pass
-
-    def test_suspend_workspace(self) -> None:
-        """Test case for suspend_workspace
-
-        Suspend Workspace
+        List Workspaces
         """
         pass
 
@@ -100,6 +79,13 @@ class TestWorkspacesApi(unittest.TestCase):
         """Test case for update_workspace
 
         Update Workspace
+        """
+        pass
+
+    def test_update_workspace_status(self) -> None:
+        """Test case for update_workspace_status
+
+        Update Workspace Status
         """
         pass
 

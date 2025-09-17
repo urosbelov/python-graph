@@ -38,7 +38,7 @@ class TestAmenityUpdate(unittest.TestCase):
                 name = '',
                 key = '',
                 type = 'boolean',
-                status = 0
+                status = 'inactive'
             )
         else:
             return AmenityUpdate(

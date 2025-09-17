@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from workspace_sdk.models.amenity_filters import AmenityFilters
-from workspace_sdk.models.pagination_request import PaginationRequest
+from workspace_sdk.models.page_request import PageRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,7 @@ class ListAmenitiesRequest(BaseModel):
     ListAmenitiesRequest
     """ # noqa: E501
     filters: Optional[AmenityFilters] = None
-    pagination: Optional[PaginationRequest] = None
+    pagination: Optional[PageRequest] = None
     __properties: ClassVar[List[str]] = ["filters", "pagination"]
 
     model_config = ConfigDict(
@@ -82,11 +82,6 @@ class ListAmenitiesRequest(BaseModel):
         if self.filters is None and "filters" in self.model_fields_set:
             _dict['filters'] = None
 
-        # set to None if pagination (nullable) is None
-        # and model_fields_set contains the field
-        if self.pagination is None and "pagination" in self.model_fields_set:
-            _dict['pagination'] = None
-
         return _dict
 
     @classmethod
@@ -100,7 +95,7 @@ class ListAmenitiesRequest(BaseModel):
 
         _obj = cls.model_validate({
             "filters": AmenityFilters.from_dict(obj["filters"]) if obj.get("filters") is not None else None,
-            "pagination": PaginationRequest.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "pagination": PageRequest.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
         })
         return _obj
 

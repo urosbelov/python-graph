@@ -17,11 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
-from workspace_sdk.models.workspace_status import WorkspaceStatus
 from workspace_sdk.models.workspace_type import WorkspaceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,14 +29,12 @@ class WorkspaceUpdate(BaseModel):
     WorkspaceUpdate
     """ # noqa: E501
     type: Optional[WorkspaceType] = None
-    status: Optional[WorkspaceStatus] = None
     name: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     avatar_id: Optional[UUID] = None
     cover_id: Optional[UUID] = None
     formatted_address: Optional[StrictStr] = None
-    deleted_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["type", "status", "name", "description", "avatar_id", "cover_id", "formatted_address", "deleted_at"]
+    __properties: ClassVar[List[str]] = ["type", "name", "description", "avatar_id", "cover_id", "formatted_address"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,11 +80,6 @@ class WorkspaceUpdate(BaseModel):
         if self.type is None and "type" in self.model_fields_set:
             _dict['type'] = None
 
-        # set to None if status (nullable) is None
-        # and model_fields_set contains the field
-        if self.status is None and "status" in self.model_fields_set:
-            _dict['status'] = None
-
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
@@ -114,11 +105,6 @@ class WorkspaceUpdate(BaseModel):
         if self.formatted_address is None and "formatted_address" in self.model_fields_set:
             _dict['formatted_address'] = None
 
-        # set to None if deleted_at (nullable) is None
-        # and model_fields_set contains the field
-        if self.deleted_at is None and "deleted_at" in self.model_fields_set:
-            _dict['deleted_at'] = None
-
         return _dict
 
     @classmethod
@@ -132,13 +118,11 @@ class WorkspaceUpdate(BaseModel):
 
         _obj = cls.model_validate({
             "type": obj.get("type"),
-            "status": obj.get("status"),
             "name": obj.get("name"),
             "description": obj.get("description"),
             "avatar_id": obj.get("avatar_id"),
             "cover_id": obj.get("cover_id"),
-            "formatted_address": obj.get("formatted_address"),
-            "deleted_at": obj.get("deleted_at")
+            "formatted_address": obj.get("formatted_address")
         })
         return _obj
 

@@ -17,19 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
+from workspace_sdk.models.workspace_response import WorkspaceResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaginationRequest(BaseModel):
+class BatchWorkspacesResponse(BaseModel):
     """
-    PaginationRequest
+    BatchWorkspacesResponse
     """ # noqa: E501
-    limit: Optional[StrictInt] = None
-    cursor: Optional[StrictStr] = None
-    direction: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["limit", "cursor", "direction"]
+    workspaces: Dict[str, WorkspaceResponse]
+    __properties: ClassVar[List[str]] = ["workspaces"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +48,7 @@ class PaginationRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaginationRequest from a JSON string"""
+        """Create an instance of BatchWorkspacesResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,26 +69,18 @@ class PaginationRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if limit (nullable) is None
-        # and model_fields_set contains the field
-        if self.limit is None and "limit" in self.model_fields_set:
-            _dict['limit'] = None
-
-        # set to None if cursor (nullable) is None
-        # and model_fields_set contains the field
-        if self.cursor is None and "cursor" in self.model_fields_set:
-            _dict['cursor'] = None
-
-        # set to None if direction (nullable) is None
-        # and model_fields_set contains the field
-        if self.direction is None and "direction" in self.model_fields_set:
-            _dict['direction'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each value in workspaces (dict)
+        _field_dict = {}
+        if self.workspaces:
+            for _key_workspaces in self.workspaces:
+                if self.workspaces[_key_workspaces]:
+                    _field_dict[_key_workspaces] = self.workspaces[_key_workspaces].to_dict()
+            _dict['workspaces'] = _field_dict
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaginationRequest from a dict"""
+        """Create an instance of BatchWorkspacesResponse from a dict"""
         if obj is None:
             return None
 
@@ -97,9 +88,12 @@ class PaginationRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "limit": obj.get("limit"),
-            "cursor": obj.get("cursor"),
-            "direction": obj.get("direction")
+            "workspaces": dict(
+                (_k, WorkspaceResponse.from_dict(_v))
+                for _k, _v in obj["workspaces"].items()
+            )
+            if obj.get("workspaces") is not None
+            else None
         })
         return _obj
 

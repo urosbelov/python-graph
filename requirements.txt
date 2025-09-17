@@ -1,9 +1,11 @@
 strawberry-graphql==0.281.0
+pyyaml==6.0.2
 python-dotenv==1.1.1
 fastapi==0.116.1
 
 # ID
 snowflakekit==0.1.1
+uvicorn==0.35.0
 
 
 

@@ -17,18 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List
+from uuid import UUID
+from workspace_sdk.models.feature_status import FeatureStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class BatchAmenityCheckRequest(BaseModel):
+class FeatureResponse(BaseModel):
     """
-    BatchAmenityCheckRequest
+    FeatureResponse
     """ # noqa: E501
+    id: UUID
     workspace_id: StrictInt
-    amenity_ids: List[StrictInt]
-    __properties: ClassVar[List[str]] = ["workspace_id", "amenity_ids"]
+    amenity_id: StrictInt
+    status: FeatureStatus
+    created_by: UUID
+    created_at: datetime
+    updated_at: datetime
+    __properties: ClassVar[List[str]] = ["id", "workspace_id", "amenity_id", "status", "created_by", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +56,7 @@ class BatchAmenityCheckRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of BatchAmenityCheckRequest from a JSON string"""
+        """Create an instance of FeatureResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +81,7 @@ class BatchAmenityCheckRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of BatchAmenityCheckRequest from a dict"""
+        """Create an instance of FeatureResponse from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +89,13 @@ class BatchAmenityCheckRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "workspace_id": obj.get("workspace_id"),
-            "amenity_ids": obj.get("amenity_ids")
+            "amenity_id": obj.get("amenity_id"),
+            "status": obj.get("status"),
+            "created_by": obj.get("created_by"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

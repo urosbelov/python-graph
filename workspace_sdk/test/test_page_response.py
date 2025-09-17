@@ -14,10 +14,10 @@
 
 import unittest
 
-from workspace_sdk.models.pagination_request import PaginationRequest
+from workspace_sdk.models.page_response import PageResponse
 
-class TestPaginationRequest(unittest.TestCase):
-    """PaginationRequest unit test stubs"""
+class TestPageResponse(unittest.TestCase):
+    """PageResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,27 +25,36 @@ class TestPaginationRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> PaginationRequest:
-        """Test PaginationRequest
+    def make_instance(self, include_optional) -> PageResponse:
+        """Test PageResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `PaginationRequest`
+        # uncomment below to create an instance of `PageResponse`
         """
-        model = PaginationRequest()
+        model = PageResponse()
         if include_optional:
-            return PaginationRequest(
-                limit = 56,
-                cursor = '',
-                direction = ''
+            return PageResponse(
+                total = 56,
+                page = 56,
+                size = 56,
+                pages = 56,
+                has_next_page = True,
+                has_previous_page = True
             )
         else:
-            return PaginationRequest(
+            return PageResponse(
+                total = 56,
+                page = 56,
+                size = 56,
+                pages = 56,
+                has_next_page = True,
+                has_previous_page = True,
         )
         """
 
-    def testPaginationRequest(self):
-        """Test PaginationRequest"""
+    def testPageResponse(self):
+        """Test PageResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

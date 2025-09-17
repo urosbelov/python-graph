@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +26,7 @@ class BatchCategoriesRequest(BaseModel):
     """
     BatchCategoriesRequest
     """ # noqa: E501
-    ids: List[StrictStr]
+    ids: List[StrictInt]
     __properties: ClassVar[List[str]] = ["ids"]
 
     model_config = ConfigDict(
