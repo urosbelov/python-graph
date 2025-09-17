@@ -1,15 +1,18 @@
-import asyncio
 from typing import List, Optional
 import strawberry
 from strawberry.types import Info
 from app.context import Context
 from app.helpers.mapper import map_to_graphql_type
 from app.helpers.sdk.call import safe_sdk_call
+from app.helpers.sdk.extract import extract_items
 from app.schema.workspace.types import Workspace
+
+# Nested
+from app.schema.workspace.category.queries import WorkspaceCategoryQueries
 
 
 @strawberry.type
-class WorkspaceQueries:
+class WorkspaceQueries(WorkspaceCategoryQueries):
 
     @strawberry.field
     async def workspace(
@@ -25,5 +28,5 @@ class WorkspaceQueries:
     @strawberry.field
     async def workspaces(self, info: Info[Context]) -> List[Workspace]:
         response = await safe_sdk_call(info.context.workspace_api.list_workspaces)
-        items = getattr(response, "items", []) or []
+        items = extract_items(response)
         return [map_to_graphql_type(item, Workspace) for item in items]
