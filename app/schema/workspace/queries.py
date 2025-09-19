@@ -23,9 +23,10 @@ class WorkspaceQueries(
     async def workspace(
         self, id: strawberry.ID, info: Info[Context]
     ) -> Optional[Workspace]:
-        # Call SDK method safely, passing context for automatic x_user_id/x_workspace_id
         workspace_data = await safe_sdk_call(
-            info.context.workspace_api.get_workspace, int(id), context=info.context
+            info.context.workspace_api.get_workspace_by_id,
+            int(id),
+            context=info.context,
         )
         return (
             map_to_graphql_type(workspace_data, Workspace) if workspace_data else None

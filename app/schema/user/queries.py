@@ -1,11 +1,20 @@
 from typing import List
 import strawberry
 
-from app.schema.user.resolvers import get_user, list_users
+from app.context import Context
+from app.helpers.mapper import map_to_graphql_type
+from app.helpers.sdk.call import safe_sdk_call
+from app.helpers.sdk.extract import extract_items
 from app.schema.user.types import User
 
 
 @strawberry.type
 class UserQueries:
-    user: User = strawberry.field(resolver=get_user)
-    users: List[User] = strawberry.field(resolver=list_users)
+
+    @strawberry.field
+    async def users(self, info: strawberry.Info[Context]) -> List[User]:
+        response = await safe_sdk_call(
+            info.context.users_api.list_users, context=info.context
+        )
+        items = extract_items(response)
+        return [map_to_graphql_type(item, User) for item in items]

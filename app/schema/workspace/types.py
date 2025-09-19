@@ -1,23 +1,24 @@
 from datetime import datetime
-import enum
+from enum import Enum
 from typing import Optional
 import strawberry
 
 
 from app.context import Context
 from app.helpers.mapper import map_to_graphql_type
+from app.schema.user.types import User
 from app.schema.workspace.category.types import WorkspaceCategory
 
 
 @strawberry.enum
-class WorkspaceType(enum.Enum):
+class WorkspaceType(Enum):
     UNSPECIFIED = "unspecified"
     PERSONAL = "personal"
     ORGANIZATION = "organization"
 
 
 @strawberry.enum
-class WorkspaceStatus(enum.Enum):
+class WorkspaceStatus(Enum):
     DRAFT = "draft"
     ACTIVE = "active"
     INACTIVE = "inactive"
@@ -40,19 +41,23 @@ class Workspace:
     avatar_id: Optional[str] = None
     cover_id: Optional[str] = None
     formatted_address: Optional[str] = None
+    created_by: Optional[strawberry.ID]
 
     # ----------
     # Field resolvers
     # ----------
     @strawberry.field
+    async def created_by_user(self, info: strawberry.Info[Context]) -> Optional[User]:
+        user_obj = await info.context.users_loader.load(self.created_by)
+        if user_obj is None:
+            return None
+        return map_to_graphql_type(user_obj, User)
+
+    @strawberry.field
     async def category(
         self, info: strawberry.Info[Context]
     ) -> Optional[WorkspaceCategory]:
-        """Fetch the category using DataLoader."""
-        # Load category via DataLoader
         category_obj = await info.context.category_loader.load(int(self.category_id))
         if category_obj is None:
             return None
-
-        # Map SDK object to GraphQL type
         return map_to_graphql_type(category_obj, WorkspaceCategory)

@@ -1,15 +1,7 @@
+from datetime import datetime
 import enum
 from typing import Optional
 import strawberry
-
-
-@strawberry.input
-class CreateUserInput:
-    first_name: str
-    middle_name: Optional[str] = None
-    last_name: str
-    email: str
-    country: Optional[str] = None
 
 
 @strawberry.enum
@@ -17,7 +9,7 @@ class UserStatus(enum.Enum):
     UNSPECIFIED = "unspecified"
     PENDING = "pending"
     ACTIVE = "active"
-    BLOCKED = "blocked"
+    SUSPENDED = "suspended"
     DELETED = "deleted"
 
 
@@ -33,7 +25,24 @@ class UserFiltersInput:
 
 @strawberry.type()
 class User:
+    # Core
     id: strawberry.ID
+
+    # Timestamps
+    created_at: datetime
+    updated_at: datetime
+    deleted_at: Optional[datetime] = None
+    deleted_by: Optional[strawberry.ID] = None
+
+    # Personal info
     first_name: str
-    middle_name: Optional[str]
-    last_name: str
+    middle_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    phone_number: Optional[str] = None
+    country: Optional[str] = None
+    # Birthday
+    birthday: Optional[datetime] = None
+
+    # Administrations
+    must_change_password: bool

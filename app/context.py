@@ -6,13 +6,19 @@ from strawberry.dataloader import DataLoader
 
 from strawberry.fastapi import BaseContext
 from app.loaders.amenity import create_amenity_loader
+from app.loaders.user import create_user_loader
 from workspace_sdk.workspace_sdk import (
-    ApiClient,
+    ApiClient as WorkspaceApiClient,
     Configuration,
     WorkspacesApi,
     CategoriesApi,
     AmenitiesApi,
     FeaturesApi,
+)
+from identity_sdk.identity_sdk import (
+    ApiClient as IdentityApiClient,
+    UsersApi,
+    SessionsApi,
 )
 from app.loaders.category import create_category_loader
 
@@ -42,8 +48,7 @@ class Context(BaseContext):
         config.retries = 3
         config.timeout = 10.0
 
-        client = ApiClient(configuration=config)
-        return WorkspacesApi(client)
+        return WorkspacesApi(WorkspaceApiClient(configuration=config))
 
     @cached_property
     def category_api(self) -> CategoriesApi:
@@ -52,7 +57,7 @@ class Context(BaseContext):
         config.host = host
         config.retries = 3
         config.timeout = 10.0
-        return CategoriesApi(ApiClient(configuration=config))
+        return CategoriesApi(WorkspaceApiClient(configuration=config))
 
     @cached_property
     def amenity_api(self) -> AmenitiesApi:
@@ -61,7 +66,7 @@ class Context(BaseContext):
         config.host = host
         config.retries = 3
         config.timeout = 10.0
-        return AmenitiesApi(ApiClient(configuration=config))
+        return AmenitiesApi(WorkspaceApiClient(configuration=config))
 
     @cached_property
     def feature_api(self) -> FeaturesApi:
@@ -70,7 +75,25 @@ class Context(BaseContext):
         config.host = host
         config.retries = 3
         config.timeout = 10.0
-        return FeaturesApi(ApiClient(configuration=config))
+        return FeaturesApi(WorkspaceApiClient(configuration=config))
+
+    @cached_property
+    def users_api(self) -> UsersApi:
+        host = os.getenv("WORKSPACE_SERVICE_URL", "http://0.0.0.0:4006")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return UsersApi(IdentityApiClient(configuration=config))
+
+    @cached_property
+    def sessions_api(self) -> SessionsApi:
+        host = os.getenv("WORKSPACE_SERVICE_URL", "http://0.0.0.0:4006")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return SessionsApi(IdentityApiClient(configuration=config))
 
     # ----------
     # DATALOADERS
@@ -82,6 +105,10 @@ class Context(BaseContext):
     @cached_property
     def amenity_loader(self) -> DataLoader:
         return create_amenity_loader(self.amenity_api)
+
+    @cached_property
+    def users_loader(self) -> DataLoader:
+        return create_user_loader(self.users_api)
 
 
 async def get_context() -> Context:

@@ -11,6 +11,12 @@ class CreateWorkspaceInput:
 
 
 @strawberry.input
+class UpdateWorkspaceInput:
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
+@strawberry.input
 class WorkspaceFiltersInput:
     owner_id: Optional[strawberry.ID] = None
     name: Optional[str] = None
