@@ -34,11 +34,8 @@ class WorkspaceQueries(
 
     @strawberry.field
     async def workspaces(self, info: Info[Context]) -> List[Workspace]:
-        # Call SDK list method safely
         response = await safe_sdk_call(
             info.context.workspace_api.list_workspaces, context=info.context
         )
-        # Safely extract items from response
         items = extract_items(response)
-        # Map each SDK item to GraphQL type
         return [map_to_graphql_type(item, Workspace) for item in items]

@@ -6,6 +6,8 @@ from strawberry.dataloader import DataLoader
 
 from strawberry.fastapi import BaseContext
 from app.loaders.amenity import create_amenity_loader
+from app.loaders.post_media import create_post_media_loader
+from app.loaders.posts import create_post_loader
 from app.loaders.user import create_user_loader
 from workspace_sdk.workspace_sdk import (
     ApiClient as WorkspaceApiClient,
@@ -20,6 +22,8 @@ from identity_sdk.identity_sdk import (
     UsersApi,
     SessionsApi,
 )
+
+from post_sdk.post_sdk import ApiClient as PostApiClient, PostsApi, PostMediaApi
 from app.loaders.category import create_category_loader
 
 
@@ -95,6 +99,24 @@ class Context(BaseContext):
         config.timeout = 10.0
         return SessionsApi(IdentityApiClient(configuration=config))
 
+    @cached_property
+    def posts_api(self) -> PostsApi:
+        host = os.getenv("POST_SERVICE_URL", "http://0.0.0.0:4003")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return PostsApi(PostApiClient(configuration=config))
+
+    @cached_property
+    def post_media_api(self) -> PostMediaApi:
+        host = os.getenv("POST_SERVICE_URL", "http://0.0.0.0:4003")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return PostMediaApi(PostApiClient(configuration=config))
+
     # ----------
     # DATALOADERS
     # ----------
@@ -109,6 +131,14 @@ class Context(BaseContext):
     @cached_property
     def users_loader(self) -> DataLoader:
         return create_user_loader(self.users_api)
+
+    @cached_property
+    def posts_loader(self) -> DataLoader:
+        return create_post_loader(self.posts_api)
+
+    @cached_property
+    def post_media_loader(self) -> DataLoader:
+        return create_post_media_loader(self.post_media_api)
 
 
 async def get_context() -> Context:
