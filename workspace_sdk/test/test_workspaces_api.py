@@ -26,17 +26,45 @@ class TestWorkspacesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_batch_workspaces(self) -> None:
-        """Test case for batch_workspaces
+    def test_activate_amenity(self) -> None:
+        """Test case for activate_amenity
 
-        Get Workspaces By Ids
+        Activate Amenity
         """
         pass
 
-    def test_bbox_query(self) -> None:
-        """Test case for bbox_query
+    def test_activate_category(self) -> None:
+        """Test case for activate_category
 
-        Bbox Query
+        Activate Category
+        """
+        pass
+
+    def test_activate_feature(self) -> None:
+        """Test case for activate_feature
+
+        Activate Feature
+        """
+        pass
+
+    def test_create_amenity(self) -> None:
+        """Test case for create_amenity
+
+        Create Amenity
+        """
+        pass
+
+    def test_create_category(self) -> None:
+        """Test case for create_category
+
+        Create Category
+        """
+        pass
+
+    def test_create_feature(self) -> None:
+        """Test case for create_feature
+
+        Create Feature
         """
         pass
 
@@ -47,6 +75,34 @@ class TestWorkspacesApi(unittest.TestCase):
         """
         pass
 
+    def test_deactivate_amenity(self) -> None:
+        """Test case for deactivate_amenity
+
+        Deactivate Amenity
+        """
+        pass
+
+    def test_deactivate_category(self) -> None:
+        """Test case for deactivate_category
+
+        Deactivate Category
+        """
+        pass
+
+    def test_deactivate_feature(self) -> None:
+        """Test case for deactivate_feature
+
+        Deactivate Feature
+        """
+        pass
+
+    def test_delete_feature(self) -> None:
+        """Test case for delete_feature
+
+        Delete Feature
+        """
+        pass
+
     def test_delete_workspace(self) -> None:
         """Test case for delete_workspace
 
@@ -54,10 +110,52 @@ class TestWorkspacesApi(unittest.TestCase):
         """
         pass
 
-    def test_get_workspace(self) -> None:
-        """Test case for get_workspace
+    def test_deprecate_amenity(self) -> None:
+        """Test case for deprecate_amenity
 
-        Get Workspace
+        Deprecate Amenity
+        """
+        pass
+
+    def test_deprecate_category(self) -> None:
+        """Test case for deprecate_category
+
+        Deprecate Category
+        """
+        pass
+
+    def test_get_amenities_batch(self) -> None:
+        """Test case for get_amenities_batch
+
+        Get Amenities Batch
+        """
+        pass
+
+    def test_get_amenity(self) -> None:
+        """Test case for get_amenity
+
+        Get Amenity
+        """
+        pass
+
+    def test_get_categories_batch(self) -> None:
+        """Test case for get_categories_batch
+
+        Get Categories Batch
+        """
+        pass
+
+    def test_get_category(self) -> None:
+        """Test case for get_category
+
+        Get Category
+        """
+        pass
+
+    def test_get_features_batch(self) -> None:
+        """Test case for get_features_batch
+
+        Get Features Batch
         """
         pass
 
@@ -65,6 +163,41 @@ class TestWorkspacesApi(unittest.TestCase):
         """Test case for get_workspace_by_handle
 
         Get Workspace By Handle
+        """
+        pass
+
+    def test_get_workspace_by_id(self) -> None:
+        """Test case for get_workspace_by_id
+
+        Get Workspace By Id
+        """
+        pass
+
+    def test_get_workspace_features(self) -> None:
+        """Test case for get_workspace_features
+
+        Get Workspace Features
+        """
+        pass
+
+    def test_get_workspaces_by_bbox(self) -> None:
+        """Test case for get_workspaces_by_bbox
+
+        Get Workspaces By Bbox
+        """
+        pass
+
+    def test_list_amenities(self) -> None:
+        """Test case for list_amenities
+
+        List Amenities
+        """
+        pass
+
+    def test_list_categories(self) -> None:
+        """Test case for list_categories
+
+        List Categories
         """
         pass
 
@@ -79,20 +212,6 @@ class TestWorkspacesApi(unittest.TestCase):
         """Test case for update_workspace
 
         Update Workspace
-        """
-        pass
-
-    def test_update_workspace_status(self) -> None:
-        """Test case for update_workspace_status
-
-        Update Workspace Status
-        """
-        pass
-
-    def test_validate_workspace_exists(self) -> None:
-        """Test case for validate_workspace_exists
-
-        Validate Workspace Exists
         """
         pass
 

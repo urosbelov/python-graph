@@ -4,6 +4,7 @@ from strawberry.extensions import ValidationCache
 # ----------
 # MAIN
 # ----------
+from app.core.middleware import GraphqlErrorMiddleware
 from app.schema.user import UserQueries, UserMutations
 from app.schema.workspace import WorkspaceQueries, WorkspaceMutations
 

@@ -5,11 +5,14 @@ from strawberry.dataloader import DataLoader
 
 
 from strawberry.fastapi import BaseContext
+from app.loaders.amenity import create_amenity_loader
 from workspace_sdk.workspace_sdk import (
     ApiClient,
+    Configuration,
     WorkspacesApi,
     CategoriesApi,
-    Configuration,
+    AmenitiesApi,
+    FeaturesApi,
 )
 from app.loaders.category import create_category_loader
 
@@ -51,12 +54,34 @@ class Context(BaseContext):
         config.timeout = 10.0
         return CategoriesApi(ApiClient(configuration=config))
 
+    @cached_property
+    def amenity_api(self) -> AmenitiesApi:
+        host = os.getenv("WORKSPACE_SERVICE_URL", "http://0.0.0.0:4001")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return AmenitiesApi(ApiClient(configuration=config))
+
+    @cached_property
+    def feature_api(self) -> FeaturesApi:
+        host = os.getenv("WORKSPACE_SERVICE_URL", "http://0.0.0.0:4001")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return FeaturesApi(ApiClient(configuration=config))
+
     # ----------
     # DATALOADERS
     # ----------
     @cached_property
     def category_loader(self) -> DataLoader:
         return create_category_loader(self.category_api)
+
+    @cached_property
+    def amenity_loader(self) -> DataLoader:
+        return create_amenity_loader(self.amenity_api)
 
 
 async def get_context() -> Context:

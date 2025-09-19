@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[WorkspaceResponse]**](WorkspaceResponse.md) |  | 
+**items** | [**List[Workspace]**](Workspace.md) |  | 
 **pagination** | [**PageResponse**](PageResponse.md) |  | 
 
 ## Example

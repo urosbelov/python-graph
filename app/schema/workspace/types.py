@@ -33,7 +33,7 @@ class Workspace:
     name: str
     handle: str
     description: Optional[str] = None
-    category_id: Optional[int] = None
+    category_id: int
     updated_at: datetime
     created_at: datetime
     deleted_at: Optional[datetime] = None
@@ -49,9 +49,6 @@ class Workspace:
         self, info: strawberry.Info[Context]
     ) -> Optional[WorkspaceCategory]:
         """Fetch the category using DataLoader."""
-        if not self.category_id or self.category_id <= 0:
-            return None
-
         # Load category via DataLoader
         category_obj = await info.context.category_loader.load(int(self.category_id))
         if category_obj is None:

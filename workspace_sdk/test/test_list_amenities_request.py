@@ -36,8 +36,9 @@ class TestListAmenitiesRequest(unittest.TestCase):
         if include_optional:
             return ListAmenitiesRequest(
                 filters = workspace_sdk.models.amenity_filters.AmenityFilters(
+                    status = 'pending', 
                     name = '', 
-                    status = 'inactive', ),
+                    key = '', ),
                 pagination = workspace_sdk.models.page_request.PageRequest(
                     page = 56, 
                     size = 56, )

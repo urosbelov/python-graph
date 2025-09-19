@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
 from workspace_sdk.models.page_response import PageResponse
-from workspace_sdk.models.workspace_response import WorkspaceResponse
+from workspace_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class ListWorkspacesResponse(BaseModel):
     """
     ListWorkspacesResponse
     """ # noqa: E501
-    items: List[WorkspaceResponse]
+    items: List[Workspace]
     pagination: PageResponse
     __properties: ClassVar[List[str]] = ["items", "pagination"]
 
@@ -93,7 +93,7 @@ class ListWorkspacesResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "items": [WorkspaceResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "items": [Workspace.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "pagination": PageResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
         })
         return _obj

@@ -10,4 +10,3 @@ uvicorn==0.35.0
 
 
 git+https://GITHUB_TOKEN@github.com/yugonautica/libraries-python.git@main#egg=libraries
-git+https://GITHUB_TOKEN@github.com/yugonautica/internal-sdk-python.git@main#egg=internal_sdk

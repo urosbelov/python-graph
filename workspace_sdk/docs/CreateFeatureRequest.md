@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**workspace_id** | **int** |  | 
+**workspace_id** | **str** |  | 
 **amenity_id** | **int** |  | 
 
 ## Example

@@ -36,7 +36,9 @@ class TestListCategoriesRequest(unittest.TestCase):
         if include_optional:
             return ListCategoriesRequest(
                 filters = workspace_sdk.models.category_filters.CategoryFilters(
-                    name = '', ),
+                    status = 'pending', 
+                    name = '', 
+                    key = '', ),
                 pagination = workspace_sdk.models.page_request.PageRequest(
                     page = 56, 
                     size = 56, )

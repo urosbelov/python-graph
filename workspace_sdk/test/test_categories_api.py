@@ -26,17 +26,10 @@ class TestCategoriesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_add_amenity_to_category(self) -> None:
-        """Test case for add_amenity_to_category
+    def test_activate_category(self) -> None:
+        """Test case for activate_category
 
-        Add Amenity To Category
-        """
-        pass
-
-    def test_batch_categories(self) -> None:
-        """Test case for batch_categories
-
-        Batch Categories
+        Activate Category
         """
         pass
 
@@ -47,6 +40,27 @@ class TestCategoriesApi(unittest.TestCase):
         """
         pass
 
+    def test_deactivate_category(self) -> None:
+        """Test case for deactivate_category
+
+        Deactivate Category
+        """
+        pass
+
+    def test_deprecate_category(self) -> None:
+        """Test case for deprecate_category
+
+        Deprecate Category
+        """
+        pass
+
+    def test_get_categories_batch(self) -> None:
+        """Test case for get_categories_batch
+
+        Get Categories Batch
+        """
+        pass
+
     def test_get_category(self) -> None:
         """Test case for get_category
 
@@ -54,31 +68,10 @@ class TestCategoriesApi(unittest.TestCase):
         """
         pass
 
-    def test_list_amenities_in_category_categories_category_id_amenities_get(self) -> None:
-        """Test case for list_amenities_in_category_categories_category_id_amenities_get
-
-        List Amenities In Category
-        """
-        pass
-
     def test_list_categories(self) -> None:
         """Test case for list_categories
 
         List Categories
-        """
-        pass
-
-    def test_update_amenity_in_category(self) -> None:
-        """Test case for update_amenity_in_category
-
-        Update Amenity In Category
-        """
-        pass
-
-    def test_update_category(self) -> None:
-        """Test case for update_category
-
-        Update Category
         """
         pass
 

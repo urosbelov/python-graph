@@ -35,7 +35,9 @@ class TestCategoryFilters(unittest.TestCase):
         model = CategoryFilters()
         if include_optional:
             return CategoryFilters(
-                name = ''
+                status = 'pending',
+                name = '',
+                key = ''
             )
         else:
             return CategoryFilters(

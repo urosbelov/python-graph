@@ -16,13 +16,15 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt
-from typing import Any, Optional
+from pydantic import StrictInt, StrictStr
+from typing import Optional
 from uuid import UUID
-from workspace_sdk.models.amenity_create import AmenityCreate
-from workspace_sdk.models.amenity_update import AmenityUpdate
-from workspace_sdk.models.batch_amenities_request import BatchAmenitiesRequest
+from workspace_sdk.models.amenity import Amenity
+from workspace_sdk.models.create_amenity_request import CreateAmenityRequest
+from workspace_sdk.models.get_amenities_batch_request import GetAmenitiesBatchRequest
+from workspace_sdk.models.get_amenities_batch_response import GetAmenitiesBatchResponse
 from workspace_sdk.models.list_amenities_request import ListAmenitiesRequest
+from workspace_sdk.models.list_amenities_response import ListAmenitiesResponse
 
 from workspace_sdk.api_client import ApiClient, RequestSerialized
 from workspace_sdk.api_response import ApiResponse
@@ -43,11 +45,11 @@ class AmenitiesApi:
 
 
     @validate_call
-    def batch_amenities(
+    def activate_amenity(
         self,
-        batch_amenities_request: BatchAmenitiesRequest,
+        amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,16 +62,16 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """Batch Amenities
+    ) -> None:
+        """Activate Amenity
 
 
-        :param batch_amenities_request: (required)
-        :type batch_amenities_request: BatchAmenitiesRequest
+        :param amenity_id: (required)
+        :type amenity_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -92,8 +94,8 @@ class AmenitiesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._batch_amenities_serialize(
-            batch_amenities_request=batch_amenities_request,
+        _param = self._activate_amenity_serialize(
+            amenity_id=amenity_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -103,7 +105,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '204': None,
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -118,11 +120,11 @@ class AmenitiesApi:
 
 
     @validate_call
-    def batch_amenities_with_http_info(
+    def activate_amenity_with_http_info(
         self,
-        batch_amenities_request: BatchAmenitiesRequest,
+        amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -135,16 +137,16 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """Batch Amenities
+    ) -> ApiResponse[None]:
+        """Activate Amenity
 
 
-        :param batch_amenities_request: (required)
-        :type batch_amenities_request: BatchAmenitiesRequest
+        :param amenity_id: (required)
+        :type amenity_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,8 +169,8 @@ class AmenitiesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._batch_amenities_serialize(
-            batch_amenities_request=batch_amenities_request,
+        _param = self._activate_amenity_serialize(
+            amenity_id=amenity_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -178,7 +180,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '204': None,
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -193,11 +195,11 @@ class AmenitiesApi:
 
 
     @validate_call
-    def batch_amenities_without_preload_content(
+    def activate_amenity_without_preload_content(
         self,
-        batch_amenities_request: BatchAmenitiesRequest,
+        amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -211,15 +213,15 @@ class AmenitiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Batch Amenities
+        """Activate Amenity
 
 
-        :param batch_amenities_request: (required)
-        :type batch_amenities_request: BatchAmenitiesRequest
+        :param amenity_id: (required)
+        :type amenity_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -242,8 +244,8 @@ class AmenitiesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._batch_amenities_serialize(
-            batch_amenities_request=batch_amenities_request,
+        _param = self._activate_amenity_serialize(
+            amenity_id=amenity_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -253,7 +255,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '204': None,
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -263,9 +265,9 @@ class AmenitiesApi:
         return response_data.response
 
 
-    def _batch_amenities_serialize(
+    def _activate_amenity_serialize(
         self,
-        batch_amenities_request,
+        amenity_id,
         x_user_id,
         x_workspace_id,
         _request_auth,
@@ -289,6 +291,8 @@ class AmenitiesApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if amenity_id is not None:
+            _path_params['amenity_id'] = amenity_id
         # process the query parameters
         # process the header parameters
         if x_user_id is not None:
@@ -297,8 +301,6 @@ class AmenitiesApi:
             _header_params['X-Workspace-Id'] = x_workspace_id
         # process the form parameters
         # process the body parameter
-        if batch_amenities_request is not None:
-            _body_params = batch_amenities_request
 
 
         # set the HTTP header `Accept`
@@ -309,19 +311,6 @@ class AmenitiesApi:
                 ]
             )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -329,7 +318,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/amenities/batch',
+            resource_path='/workspaces/amenities/{amenity_id}/activate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -348,9 +337,9 @@ class AmenitiesApi:
     @validate_call
     def create_amenity(
         self,
-        amenity_create: AmenityCreate,
+        create_amenity_request: CreateAmenityRequest,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -363,16 +352,16 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> Amenity:
         """Create Amenity
 
 
-        :param amenity_create: (required)
-        :type amenity_create: AmenityCreate
+        :param create_amenity_request: (required)
+        :type create_amenity_request: CreateAmenityRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -396,7 +385,7 @@ class AmenitiesApi:
         """ # noqa: E501
 
         _param = self._create_amenity_serialize(
-            amenity_create=amenity_create,
+            create_amenity_request=create_amenity_request,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -406,7 +395,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "Amenity",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -423,9 +412,9 @@ class AmenitiesApi:
     @validate_call
     def create_amenity_with_http_info(
         self,
-        amenity_create: AmenityCreate,
+        create_amenity_request: CreateAmenityRequest,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -438,16 +427,16 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[Amenity]:
         """Create Amenity
 
 
-        :param amenity_create: (required)
-        :type amenity_create: AmenityCreate
+        :param create_amenity_request: (required)
+        :type create_amenity_request: CreateAmenityRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -471,7 +460,7 @@ class AmenitiesApi:
         """ # noqa: E501
 
         _param = self._create_amenity_serialize(
-            amenity_create=amenity_create,
+            create_amenity_request=create_amenity_request,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -481,7 +470,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "Amenity",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -498,9 +487,9 @@ class AmenitiesApi:
     @validate_call
     def create_amenity_without_preload_content(
         self,
-        amenity_create: AmenityCreate,
+        create_amenity_request: CreateAmenityRequest,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -517,12 +506,12 @@ class AmenitiesApi:
         """Create Amenity
 
 
-        :param amenity_create: (required)
-        :type amenity_create: AmenityCreate
+        :param create_amenity_request: (required)
+        :type create_amenity_request: CreateAmenityRequest
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -546,7 +535,7 @@ class AmenitiesApi:
         """ # noqa: E501
 
         _param = self._create_amenity_serialize(
-            amenity_create=amenity_create,
+            create_amenity_request=create_amenity_request,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -556,7 +545,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "Amenity",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -568,7 +557,7 @@ class AmenitiesApi:
 
     def _create_amenity_serialize(
         self,
-        amenity_create,
+        create_amenity_request,
         x_user_id,
         x_workspace_id,
         _request_auth,
@@ -600,8 +589,8 @@ class AmenitiesApi:
             _header_params['X-Workspace-Id'] = x_workspace_id
         # process the form parameters
         # process the body parameter
-        if amenity_create is not None:
-            _body_params = amenity_create
+        if create_amenity_request is not None:
+            _body_params = create_amenity_request
 
 
         # set the HTTP header `Accept`
@@ -632,7 +621,890 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/amenities/',
+            resource_path='/workspaces/amenities/',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def deactivate_amenity(
+        self,
+        amenity_id: StrictInt,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Deactivate Amenity
+
+
+        :param amenity_id: (required)
+        :type amenity_id: int
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deactivate_amenity_serialize(
+            amenity_id=amenity_id,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def deactivate_amenity_with_http_info(
+        self,
+        amenity_id: StrictInt,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Deactivate Amenity
+
+
+        :param amenity_id: (required)
+        :type amenity_id: int
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deactivate_amenity_serialize(
+            amenity_id=amenity_id,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def deactivate_amenity_without_preload_content(
+        self,
+        amenity_id: StrictInt,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Deactivate Amenity
+
+
+        :param amenity_id: (required)
+        :type amenity_id: int
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deactivate_amenity_serialize(
+            amenity_id=amenity_id,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _deactivate_amenity_serialize(
+        self,
+        amenity_id,
+        x_user_id,
+        x_workspace_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if amenity_id is not None:
+            _path_params['amenity_id'] = amenity_id
+        # process the query parameters
+        # process the header parameters
+        if x_user_id is not None:
+            _header_params['X-User-Id'] = x_user_id
+        if x_workspace_id is not None:
+            _header_params['X-Workspace-Id'] = x_workspace_id
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/workspaces/amenities/{amenity_id}/deactivate',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def deprecate_amenity(
+        self,
+        amenity_id: StrictInt,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Deprecate Amenity
+
+
+        :param amenity_id: (required)
+        :type amenity_id: int
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deprecate_amenity_serialize(
+            amenity_id=amenity_id,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def deprecate_amenity_with_http_info(
+        self,
+        amenity_id: StrictInt,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Deprecate Amenity
+
+
+        :param amenity_id: (required)
+        :type amenity_id: int
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deprecate_amenity_serialize(
+            amenity_id=amenity_id,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def deprecate_amenity_without_preload_content(
+        self,
+        amenity_id: StrictInt,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Deprecate Amenity
+
+
+        :param amenity_id: (required)
+        :type amenity_id: int
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deprecate_amenity_serialize(
+            amenity_id=amenity_id,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _deprecate_amenity_serialize(
+        self,
+        amenity_id,
+        x_user_id,
+        x_workspace_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if amenity_id is not None:
+            _path_params['amenity_id'] = amenity_id
+        # process the query parameters
+        # process the header parameters
+        if x_user_id is not None:
+            _header_params['X-User-Id'] = x_user_id
+        if x_workspace_id is not None:
+            _header_params['X-Workspace-Id'] = x_workspace_id
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/workspaces/amenities/{amenity_id}/deprecate',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_amenities_batch(
+        self,
+        get_amenities_batch_request: GetAmenitiesBatchRequest,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetAmenitiesBatchResponse:
+        """Get Amenities Batch
+
+
+        :param get_amenities_batch_request: (required)
+        :type get_amenities_batch_request: GetAmenitiesBatchRequest
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_amenities_batch_serialize(
+            get_amenities_batch_request=get_amenities_batch_request,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAmenitiesBatchResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_amenities_batch_with_http_info(
+        self,
+        get_amenities_batch_request: GetAmenitiesBatchRequest,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetAmenitiesBatchResponse]:
+        """Get Amenities Batch
+
+
+        :param get_amenities_batch_request: (required)
+        :type get_amenities_batch_request: GetAmenitiesBatchRequest
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_amenities_batch_serialize(
+            get_amenities_batch_request=get_amenities_batch_request,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAmenitiesBatchResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_amenities_batch_without_preload_content(
+        self,
+        get_amenities_batch_request: GetAmenitiesBatchRequest,
+        x_user_id: Optional[UUID] = None,
+        x_workspace_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Amenities Batch
+
+
+        :param get_amenities_batch_request: (required)
+        :type get_amenities_batch_request: GetAmenitiesBatchRequest
+        :param x_user_id:
+        :type x_user_id: str
+        :param x_workspace_id:
+        :type x_workspace_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_amenities_batch_serialize(
+            get_amenities_batch_request=get_amenities_batch_request,
+            x_user_id=x_user_id,
+            x_workspace_id=x_workspace_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAmenitiesBatchResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_amenities_batch_serialize(
+        self,
+        get_amenities_batch_request,
+        x_user_id,
+        x_workspace_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        if x_user_id is not None:
+            _header_params['X-User-Id'] = x_user_id
+        if x_workspace_id is not None:
+            _header_params['X-Workspace-Id'] = x_workspace_id
+        # process the form parameters
+        # process the body parameter
+        if get_amenities_batch_request is not None:
+            _body_params = get_amenities_batch_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/workspaces/amenities/batch',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -653,7 +1525,7 @@ class AmenitiesApi:
         self,
         amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -666,7 +1538,7 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> Amenity:
         """Get Amenity
 
 
@@ -675,7 +1547,7 @@ class AmenitiesApi:
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -709,7 +1581,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "Amenity",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -728,7 +1600,7 @@ class AmenitiesApi:
         self,
         amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -741,7 +1613,7 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[Amenity]:
         """Get Amenity
 
 
@@ -750,7 +1622,7 @@ class AmenitiesApi:
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -784,7 +1656,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "Amenity",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -803,7 +1675,7 @@ class AmenitiesApi:
         self,
         amenity_id: StrictInt,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -825,7 +1697,7 @@ class AmenitiesApi:
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -859,7 +1731,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "Amenity",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -922,7 +1794,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/amenities/{amenity_id}',
+            resource_path='/workspaces/amenities/{amenity_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -942,7 +1814,7 @@ class AmenitiesApi:
     def list_amenities(
         self,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         list_amenities_request: Optional[ListAmenitiesRequest] = None,
         _request_timeout: Union[
             None,
@@ -956,14 +1828,14 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> ListAmenitiesResponse:
         """List Amenities
 
 
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param list_amenities_request:
         :type list_amenities_request: ListAmenitiesRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -999,7 +1871,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "ListAmenitiesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1017,7 +1889,7 @@ class AmenitiesApi:
     def list_amenities_with_http_info(
         self,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         list_amenities_request: Optional[ListAmenitiesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1031,14 +1903,14 @@ class AmenitiesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[ListAmenitiesResponse]:
         """List Amenities
 
 
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param list_amenities_request:
         :type list_amenities_request: ListAmenitiesRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1074,7 +1946,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "ListAmenitiesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1092,7 +1964,7 @@ class AmenitiesApi:
     def list_amenities_without_preload_content(
         self,
         x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
+        x_workspace_id: Optional[StrictStr] = None,
         list_amenities_request: Optional[ListAmenitiesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1113,7 +1985,7 @@ class AmenitiesApi:
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
-        :type x_workspace_id: int
+        :type x_workspace_id: str
         :param list_amenities_request:
         :type list_amenities_request: ListAmenitiesRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1149,7 +2021,7 @@ class AmenitiesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "ListAmenitiesResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1225,325 +2097,7 @@ class AmenitiesApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/amenities/list',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def update_amenity(
-        self,
-        amenity_id: StrictInt,
-        amenity_update: AmenityUpdate,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """Update Amenity
-
-
-        :param amenity_id: (required)
-        :type amenity_id: int
-        :param amenity_update: (required)
-        :type amenity_update: AmenityUpdate
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_amenity_serialize(
-            amenity_id=amenity_id,
-            amenity_update=amenity_update,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def update_amenity_with_http_info(
-        self,
-        amenity_id: StrictInt,
-        amenity_update: AmenityUpdate,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """Update Amenity
-
-
-        :param amenity_id: (required)
-        :type amenity_id: int
-        :param amenity_update: (required)
-        :type amenity_update: AmenityUpdate
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_amenity_serialize(
-            amenity_id=amenity_id,
-            amenity_update=amenity_update,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def update_amenity_without_preload_content(
-        self,
-        amenity_id: StrictInt,
-        amenity_update: AmenityUpdate,
-        x_user_id: Optional[UUID] = None,
-        x_workspace_id: Optional[StrictInt] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Update Amenity
-
-
-        :param amenity_id: (required)
-        :type amenity_id: int
-        :param amenity_update: (required)
-        :type amenity_update: AmenityUpdate
-        :param x_user_id:
-        :type x_user_id: str
-        :param x_workspace_id:
-        :type x_workspace_id: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_amenity_serialize(
-            amenity_id=amenity_id,
-            amenity_update=amenity_update,
-            x_user_id=x_user_id,
-            x_workspace_id=x_workspace_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _update_amenity_serialize(
-        self,
-        amenity_id,
-        amenity_update,
-        x_user_id,
-        x_workspace_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if amenity_id is not None:
-            _path_params['amenity_id'] = amenity_id
-        # process the query parameters
-        # process the header parameters
-        if x_user_id is not None:
-            _header_params['X-User-Id'] = x_user_id
-        if x_workspace_id is not None:
-            _header_params['X-Workspace-Id'] = x_workspace_id
-        # process the form parameters
-        # process the body parameter
-        if amenity_update is not None:
-            _body_params = amenity_update
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/amenities/{amenity_id}',
+            resource_path='/workspaces/amenities/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

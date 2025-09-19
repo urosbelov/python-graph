@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +26,7 @@ class CreateFeatureRequest(BaseModel):
     """
     CreateFeatureRequest
     """ # noqa: E501
-    workspace_id: StrictInt
+    workspace_id: StrictStr
     amenity_id: StrictInt
     __properties: ClassVar[List[str]] = ["workspace_id", "amenity_id"]
 

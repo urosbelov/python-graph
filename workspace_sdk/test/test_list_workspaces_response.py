@@ -36,21 +36,26 @@ class TestListWorkspacesResponse(unittest.TestCase):
         if include_optional:
             return ListWorkspacesResponse(
                 items = [
-                    workspace_sdk.models.workspace_response.WorkspaceResponse(
+                    workspace_sdk.models.workspace.Workspace(
                         id = 56, 
-                        key = '', 
-                        type = 'unspecified', 
+                        base62_id = '', 
                         status = 'draft', 
-                        name = '', 
-                        handle = '', 
-                        category_id = 56, 
-                        avatar_id = '', 
-                        cover_id = '', 
-                        formatted_address = '', 
+                        created_by = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         deleted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        deleted_by = '', )
+                        deleted_by = '', 
+                        type = 'unspecified', 
+                        name = '', 
+                        handle = '', 
+                        description = '', 
+                        category_id = 56, 
+                        formatted_address = '', 
+                        avatar_id = '', 
+                        cover_id = '', 
+                        location = workspace_sdk.models.point.Point(
+                            latitude = 1.337, 
+                            longitude = 1.337, ), )
                     ],
                 pagination = workspace_sdk.models.page_response.PageResponse(
                     total = 56, 
@@ -63,21 +68,26 @@ class TestListWorkspacesResponse(unittest.TestCase):
         else:
             return ListWorkspacesResponse(
                 items = [
-                    workspace_sdk.models.workspace_response.WorkspaceResponse(
+                    workspace_sdk.models.workspace.Workspace(
                         id = 56, 
-                        key = '', 
-                        type = 'unspecified', 
+                        base62_id = '', 
                         status = 'draft', 
-                        name = '', 
-                        handle = '', 
-                        category_id = 56, 
-                        avatar_id = '', 
-                        cover_id = '', 
-                        formatted_address = '', 
+                        created_by = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         deleted_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        deleted_by = '', )
+                        deleted_by = '', 
+                        type = 'unspecified', 
+                        name = '', 
+                        handle = '', 
+                        description = '', 
+                        category_id = 56, 
+                        formatted_address = '', 
+                        avatar_id = '', 
+                        cover_id = '', 
+                        location = workspace_sdk.models.point.Point(
+                            latitude = 1.337, 
+                            longitude = 1.337, ), )
                     ],
                 pagination = workspace_sdk.models.page_response.PageResponse(
                     total = 56, 

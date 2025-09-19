@@ -35,8 +35,9 @@ class TestAmenityFilters(unittest.TestCase):
         model = AmenityFilters()
         if include_optional:
             return AmenityFilters(
+                status = 'pending',
                 name = '',
-                status = 'inactive'
+                key = ''
             )
         else:
             return AmenityFilters(

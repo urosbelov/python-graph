@@ -27,9 +27,10 @@ class AmenityFilters(BaseModel):
     """
     AmenityFilters
     """ # noqa: E501
-    name: Optional[StrictStr] = None
     status: Optional[AmenityStatus] = None
-    __properties: ClassVar[List[str]] = ["name", "status"]
+    name: Optional[StrictStr] = None
+    key: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["status", "name", "key"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,15 +71,20 @@ class AmenityFilters(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
             _dict['name'] = None
 
-        # set to None if status (nullable) is None
+        # set to None if key (nullable) is None
         # and model_fields_set contains the field
-        if self.status is None and "status" in self.model_fields_set:
-            _dict['status'] = None
+        if self.key is None and "key" in self.model_fields_set:
+            _dict['key'] = None
 
         return _dict
 
@@ -92,8 +98,9 @@ class AmenityFilters(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "status": obj.get("status"),
             "name": obj.get("name"),
-            "status": obj.get("status")
+            "key": obj.get("key")
         })
         return _obj
 

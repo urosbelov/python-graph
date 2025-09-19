@@ -4,20 +4,19 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_amenity_to_category**](CategoriesApi.md#add_amenity_to_category) | **POST** /categories/{category_id}/amenities/{amenity_id} | Add Amenity To Category
-[**batch_categories**](CategoriesApi.md#batch_categories) | **POST** /categories/batch | Batch Categories
-[**create_category**](CategoriesApi.md#create_category) | **POST** /categories/ | Create Category
-[**get_category**](CategoriesApi.md#get_category) | **GET** /categories/{category_id} | Get Category
-[**list_amenities_in_category_categories_category_id_amenities_get**](CategoriesApi.md#list_amenities_in_category_categories_category_id_amenities_get) | **GET** /categories/{category_id}/amenities | List Amenities In Category
-[**list_categories**](CategoriesApi.md#list_categories) | **POST** /categories/list | List Categories
-[**update_amenity_in_category**](CategoriesApi.md#update_amenity_in_category) | **PUT** /categories/{category_id}/amenities/{amenity_id} | Update Amenity In Category
-[**update_category**](CategoriesApi.md#update_category) | **PUT** /categories/{category_id} | Update Category
+[**activate_category**](CategoriesApi.md#activate_category) | **POST** /workspaces/categories/{category_id}/activate | Activate Category
+[**create_category**](CategoriesApi.md#create_category) | **POST** /workspaces/categories/ | Create Category
+[**deactivate_category**](CategoriesApi.md#deactivate_category) | **POST** /workspaces/categories/{category_id}/deactivate | Deactivate Category
+[**deprecate_category**](CategoriesApi.md#deprecate_category) | **POST** /workspaces/categories/{category_id}/deprecate | Deprecate Category
+[**get_categories_batch**](CategoriesApi.md#get_categories_batch) | **POST** /workspaces/categories/batch | Get Categories Batch
+[**get_category**](CategoriesApi.md#get_category) | **GET** /workspaces/categories/{category_id} | Get Category
+[**list_categories**](CategoriesApi.md#list_categories) | **POST** /workspaces/categories/list | List Categories
 
 
-# **add_amenity_to_category**
-> object add_amenity_to_category(category_id, amenity_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+# **activate_category**
+> activate_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
-Add Amenity To Category
+Activate Category
 
 ### Example
 
@@ -39,17 +38,14 @@ with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.CategoriesApi(api_client)
     category_id = 56 # int | 
-    amenity_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
-        # Add Amenity To Category
-        api_response = api_instance.add_amenity_to_category(category_id, amenity_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-        print("The response of CategoriesApi->add_amenity_to_category:\n")
-        pprint(api_response)
+        # Activate Category
+        api_instance.activate_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
     except Exception as e:
-        print("Exception when calling CategoriesApi->add_amenity_to_category: %s\n" % e)
+        print("Exception when calling CategoriesApi->activate_category: %s\n" % e)
 ```
 
 
@@ -60,13 +56,12 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **category_id** | **int**|  | 
- **amenity_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
@@ -81,22 +76,23 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+**204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **batch_categories**
-> object batch_categories(batch_categories_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+# **create_category**
+> Category create_category(create_category_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
-Batch Categories
+Create Category
 
 ### Example
 
 
 ```python
 import workspace_sdk
-from workspace_sdk.models.batch_categories_request import BatchCategoriesRequest
+from workspace_sdk.models.category import Category
+from workspace_sdk.models.create_category_request import CreateCategoryRequest
 from workspace_sdk.rest import ApiException
 from pprint import pprint
 
@@ -111,17 +107,17 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.CategoriesApi(api_client)
-    batch_categories_request = workspace_sdk.BatchCategoriesRequest() # BatchCategoriesRequest | 
+    create_category_request = workspace_sdk.CreateCategoryRequest() # CreateCategoryRequest | 
     x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
-        # Batch Categories
-        api_response = api_instance.batch_categories(batch_categories_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-        print("The response of CategoriesApi->batch_categories:\n")
+        # Create Category
+        api_response = api_instance.create_category(create_category_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        print("The response of CategoriesApi->create_category:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CategoriesApi->batch_categories: %s\n" % e)
+        print("Exception when calling CategoriesApi->create_category: %s\n" % e)
 ```
 
 
@@ -131,13 +127,13 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **batch_categories_request** | [**BatchCategoriesRequest**](BatchCategoriesRequest.md)|  | 
+ **create_category_request** | [**CreateCategoryRequest**](CreateCategoryRequest.md)|  | 
  **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
 
 ### Return type
 
-**object**
+[**Category**](Category.md)
 
 ### Authorization
 
@@ -157,17 +153,16 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_category**
-> object create_category(category_create, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+# **deactivate_category**
+> deactivate_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
-Create Category
+Deactivate Category
 
 ### Example
 
 
 ```python
 import workspace_sdk
-from workspace_sdk.models.category_create import CategoryCreate
 from workspace_sdk.rest import ApiException
 from pprint import pprint
 
@@ -182,17 +177,15 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.CategoriesApi(api_client)
-    category_create = workspace_sdk.CategoryCreate() # CategoryCreate | 
+    category_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
-        # Create Category
-        api_response = api_instance.create_category(category_create, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-        print("The response of CategoriesApi->create_category:\n")
-        pprint(api_response)
+        # Deactivate Category
+        api_instance.deactivate_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
     except Exception as e:
-        print("Exception when calling CategoriesApi->create_category: %s\n" % e)
+        print("Exception when calling CategoriesApi->deactivate_category: %s\n" % e)
 ```
 
 
@@ -202,13 +195,153 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **category_create** | [**CategoryCreate**](CategoryCreate.md)|  | 
+ **category_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
 
 ### Return type
 
-**object**
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deprecate_category**
+> deprecate_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+
+Deprecate Category
+
+### Example
+
+
+```python
+import workspace_sdk
+from workspace_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = workspace_sdk.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with workspace_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = workspace_sdk.CategoriesApi(api_client)
+    category_id = 56 # int | 
+    x_user_id = 'x_user_id_example' # str |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
+
+    try:
+        # Deprecate Category
+        api_instance.deprecate_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+    except Exception as e:
+        print("Exception when calling CategoriesApi->deprecate_category: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **category_id** | **int**|  | 
+ **x_user_id** | **str**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_categories_batch**
+> GetCategoriesBatchResponse get_categories_batch(get_categories_batch_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+
+Get Categories Batch
+
+### Example
+
+
+```python
+import workspace_sdk
+from workspace_sdk.models.get_categories_batch_request import GetCategoriesBatchRequest
+from workspace_sdk.models.get_categories_batch_response import GetCategoriesBatchResponse
+from workspace_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = workspace_sdk.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with workspace_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = workspace_sdk.CategoriesApi(api_client)
+    get_categories_batch_request = workspace_sdk.GetCategoriesBatchRequest() # GetCategoriesBatchRequest | 
+    x_user_id = 'x_user_id_example' # str |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
+
+    try:
+        # Get Categories Batch
+        api_response = api_instance.get_categories_batch(get_categories_batch_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        print("The response of CategoriesApi->get_categories_batch:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CategoriesApi->get_categories_batch: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **get_categories_batch_request** | [**GetCategoriesBatchRequest**](GetCategoriesBatchRequest.md)|  | 
+ **x_user_id** | **str**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
+
+### Return type
+
+[**GetCategoriesBatchResponse**](GetCategoriesBatchResponse.md)
 
 ### Authorization
 
@@ -229,7 +362,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_category**
-> object get_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> Category get_category(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Get Category
 
@@ -238,6 +371,7 @@ Get Category
 
 ```python
 import workspace_sdk
+from workspace_sdk.models.category import Category
 from workspace_sdk.rest import ApiException
 from pprint import pprint
 
@@ -254,7 +388,7 @@ with workspace_sdk.ApiClient(configuration) as api_client:
     api_instance = workspace_sdk.CategoriesApi(api_client)
     category_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Get Category
@@ -274,81 +408,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **category_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
 
 ### Return type
 
-**object**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **list_amenities_in_category_categories_category_id_amenities_get**
-> object list_amenities_in_category_categories_category_id_amenities_get(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-
-List Amenities In Category
-
-### Example
-
-
-```python
-import workspace_sdk
-from workspace_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = workspace_sdk.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with workspace_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = workspace_sdk.CategoriesApi(api_client)
-    category_id = 56 # int | 
-    x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
-
-    try:
-        # List Amenities In Category
-        api_response = api_instance.list_amenities_in_category_categories_category_id_amenities_get(category_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-        print("The response of CategoriesApi->list_amenities_in_category_categories_category_id_amenities_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling CategoriesApi->list_amenities_in_category_categories_category_id_amenities_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **category_id** | **int**|  | 
- **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
-
-### Return type
-
-**object**
+[**Category**](Category.md)
 
 ### Authorization
 
@@ -369,7 +433,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_categories**
-> object list_categories(x_user_id=x_user_id, x_workspace_id=x_workspace_id, list_categories_request=list_categories_request)
+> ListCategoriesResponse list_categories(x_user_id=x_user_id, x_workspace_id=x_workspace_id, list_categories_request=list_categories_request)
 
 List Categories
 
@@ -379,6 +443,7 @@ List Categories
 ```python
 import workspace_sdk
 from workspace_sdk.models.list_categories_request import ListCategoriesRequest
+from workspace_sdk.models.list_categories_response import ListCategoriesResponse
 from workspace_sdk.rest import ApiException
 from pprint import pprint
 
@@ -394,7 +459,7 @@ with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.CategoriesApi(api_client)
     x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
     list_categories_request = workspace_sdk.ListCategoriesRequest() # ListCategoriesRequest |  (optional)
 
     try:
@@ -414,158 +479,12 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
  **list_categories_request** | [**ListCategoriesRequest**](ListCategoriesRequest.md)|  | [optional] 
 
 ### Return type
 
-**object**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_amenity_in_category**
-> update_amenity_in_category(category_id, amenity_id, update_category_amenity, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-
-Update Amenity In Category
-
-### Example
-
-
-```python
-import workspace_sdk
-from workspace_sdk.models.update_category_amenity import UpdateCategoryAmenity
-from workspace_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = workspace_sdk.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with workspace_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = workspace_sdk.CategoriesApi(api_client)
-    category_id = 56 # int | 
-    amenity_id = 56 # int | 
-    update_category_amenity = workspace_sdk.UpdateCategoryAmenity() # UpdateCategoryAmenity | 
-    x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
-
-    try:
-        # Update Amenity In Category
-        api_instance.update_amenity_in_category(category_id, amenity_id, update_category_amenity, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-    except Exception as e:
-        print("Exception when calling CategoriesApi->update_amenity_in_category: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **category_id** | **int**|  | 
- **amenity_id** | **int**|  | 
- **update_category_amenity** | [**UpdateCategoryAmenity**](UpdateCategoryAmenity.md)|  | 
- **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_category**
-> object update_category(category_id, category_update, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-
-Update Category
-
-### Example
-
-
-```python
-import workspace_sdk
-from workspace_sdk.models.category_update import CategoryUpdate
-from workspace_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = workspace_sdk.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-with workspace_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = workspace_sdk.CategoriesApi(api_client)
-    category_id = 56 # int | 
-    category_update = workspace_sdk.CategoryUpdate() # CategoryUpdate | 
-    x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
-
-    try:
-        # Update Category
-        api_response = api_instance.update_category(category_id, category_update, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-        print("The response of CategoriesApi->update_category:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling CategoriesApi->update_category: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **category_id** | **int**|  | 
- **category_update** | [**CategoryUpdate**](CategoryUpdate.md)|  | 
- **x_user_id** | **str**|  | [optional] 
- **x_workspace_id** | **int**|  | [optional] 
-
-### Return type
-
-**object**
+[**ListCategoriesResponse**](ListCategoriesResponse.md)
 
 ### Authorization
 

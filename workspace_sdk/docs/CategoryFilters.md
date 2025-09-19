@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**status** | [**CategoryStatus**](CategoryStatus.md) |  | [optional] 
 **name** | **str** |  | [optional] 
+**key** | **str** |  | [optional] 
 
 ## Example
 

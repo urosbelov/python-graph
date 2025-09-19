@@ -26,10 +26,10 @@ class TestAmenitiesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_batch_amenities(self) -> None:
-        """Test case for batch_amenities
+    def test_activate_amenity(self) -> None:
+        """Test case for activate_amenity
 
-        Batch Amenities
+        Activate Amenity
         """
         pass
 
@@ -37,6 +37,27 @@ class TestAmenitiesApi(unittest.TestCase):
         """Test case for create_amenity
 
         Create Amenity
+        """
+        pass
+
+    def test_deactivate_amenity(self) -> None:
+        """Test case for deactivate_amenity
+
+        Deactivate Amenity
+        """
+        pass
+
+    def test_deprecate_amenity(self) -> None:
+        """Test case for deprecate_amenity
+
+        Deprecate Amenity
+        """
+        pass
+
+    def test_get_amenities_batch(self) -> None:
+        """Test case for get_amenities_batch
+
+        Get Amenities Batch
         """
         pass
 
@@ -51,13 +72,6 @@ class TestAmenitiesApi(unittest.TestCase):
         """Test case for list_amenities
 
         List Amenities
-        """
-        pass
-
-    def test_update_amenity(self) -> None:
-        """Test case for update_amenity
-
-        Update Amenity
         """
         pass
 

@@ -26,10 +26,10 @@ class TestFeaturesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_batch(self) -> None:
-        """Test case for batch
+    def test_activate_feature(self) -> None:
+        """Test case for activate_feature
 
-        Features Batch
+        Activate Feature
         """
         pass
 
@@ -40,10 +40,31 @@ class TestFeaturesApi(unittest.TestCase):
         """
         pass
 
-    def test_delete_workspace_feature(self) -> None:
-        """Test case for delete_workspace_feature
+    def test_deactivate_feature(self) -> None:
+        """Test case for deactivate_feature
+
+        Deactivate Feature
+        """
+        pass
+
+    def test_delete_feature(self) -> None:
+        """Test case for delete_feature
 
         Delete Feature
+        """
+        pass
+
+    def test_get_features_batch(self) -> None:
+        """Test case for get_features_batch
+
+        Get Features Batch
+        """
+        pass
+
+    def test_get_workspace_features(self) -> None:
+        """Test case for get_workspace_features
+
+        Get Workspace Features
         """
         pass
 

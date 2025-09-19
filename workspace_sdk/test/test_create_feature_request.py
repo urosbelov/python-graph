@@ -35,12 +35,12 @@ class TestCreateFeatureRequest(unittest.TestCase):
         model = CreateFeatureRequest()
         if include_optional:
             return CreateFeatureRequest(
-                workspace_id = 56,
+                workspace_id = '',
                 amenity_id = 56
             )
         else:
             return CreateFeatureRequest(
-                workspace_id = 56,
+                workspace_id = '',
                 amenity_id = 56,
         )
         """

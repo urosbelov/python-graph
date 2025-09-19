@@ -26,8 +26,9 @@ class AmenityStatus(str, Enum):
     """
     allowed enum values
     """
-    INACTIVE = 'inactive'
+    PENDING = 'pending'
     ACTIVE = 'active'
+    INACTIVE = 'inactive'
     DEPRECATED = 'deprecated'
 
     @classmethod

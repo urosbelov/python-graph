@@ -5,8 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
 **status** | [**AmenityStatus**](AmenityStatus.md) |  | [optional] 
+**name** | **str** |  | [optional] 
+**key** | **str** |  | [optional] 
 
 ## Example
 

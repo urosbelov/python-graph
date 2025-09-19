@@ -67,17 +67,15 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.AmenitiesApi(api_client)
-    batch_amenities_request = workspace_sdk.BatchAmenitiesRequest() # BatchAmenitiesRequest | 
+    amenity_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
-    x_workspace_id = 56 # int |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
-        # Batch Amenities
-        api_response = api_instance.batch_amenities(batch_amenities_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
-        print("The response of AmenitiesApi->batch_amenities:\n")
-        pprint(api_response)
+        # Activate Amenity
+        api_instance.activate_amenity(amenity_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
     except ApiException as e:
-        print("Exception when calling AmenitiesApi->batch_amenities: %s\n" % e)
+        print("Exception when calling AmenitiesApi->activate_amenity: %s\n" % e)
 
 ```
 
@@ -87,75 +85,98 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AmenitiesApi* | [**batch_amenities**](docs/AmenitiesApi.md#batch_amenities) | **POST** /amenities/batch | Batch Amenities
-*AmenitiesApi* | [**create_amenity**](docs/AmenitiesApi.md#create_amenity) | **POST** /amenities/ | Create Amenity
-*AmenitiesApi* | [**get_amenity**](docs/AmenitiesApi.md#get_amenity) | **GET** /amenities/{amenity_id} | Get Amenity
-*AmenitiesApi* | [**list_amenities**](docs/AmenitiesApi.md#list_amenities) | **POST** /amenities/list | List Amenities
-*AmenitiesApi* | [**update_amenity**](docs/AmenitiesApi.md#update_amenity) | **PUT** /amenities/{amenity_id} | Update Amenity
-*CategoriesApi* | [**add_amenity_to_category**](docs/CategoriesApi.md#add_amenity_to_category) | **POST** /categories/{category_id}/amenities/{amenity_id} | Add Amenity To Category
-*CategoriesApi* | [**batch_categories**](docs/CategoriesApi.md#batch_categories) | **POST** /categories/batch | Batch Categories
-*CategoriesApi* | [**create_category**](docs/CategoriesApi.md#create_category) | **POST** /categories/ | Create Category
-*CategoriesApi* | [**get_category**](docs/CategoriesApi.md#get_category) | **GET** /categories/{category_id} | Get Category
-*CategoriesApi* | [**list_amenities_in_category_categories_category_id_amenities_get**](docs/CategoriesApi.md#list_amenities_in_category_categories_category_id_amenities_get) | **GET** /categories/{category_id}/amenities | List Amenities In Category
-*CategoriesApi* | [**list_categories**](docs/CategoriesApi.md#list_categories) | **POST** /categories/list | List Categories
-*CategoriesApi* | [**update_amenity_in_category**](docs/CategoriesApi.md#update_amenity_in_category) | **PUT** /categories/{category_id}/amenities/{amenity_id} | Update Amenity In Category
-*CategoriesApi* | [**update_category**](docs/CategoriesApi.md#update_category) | **PUT** /categories/{category_id} | Update Category
-*FeaturesApi* | [**batch**](docs/FeaturesApi.md#batch) | **POST** /features/batch | Features Batch
-*FeaturesApi* | [**create_feature**](docs/FeaturesApi.md#create_feature) | **POST** /features/ | Create Feature
-*FeaturesApi* | [**delete_workspace_feature**](docs/FeaturesApi.md#delete_workspace_feature) | **DELETE** /features/{feature_id} | Delete Feature
-*WorkspacesApi* | [**batch_workspaces**](docs/WorkspacesApi.md#batch_workspaces) | **POST** /workspaces/batch | Get Workspaces By Ids
-*WorkspacesApi* | [**bbox_query**](docs/WorkspacesApi.md#bbox_query) | **POST** /workspaces/bbox | Bbox Query
+*AmenitiesApi* | [**activate_amenity**](docs/AmenitiesApi.md#activate_amenity) | **POST** /workspaces/amenities/{amenity_id}/activate | Activate Amenity
+*AmenitiesApi* | [**create_amenity**](docs/AmenitiesApi.md#create_amenity) | **POST** /workspaces/amenities/ | Create Amenity
+*AmenitiesApi* | [**deactivate_amenity**](docs/AmenitiesApi.md#deactivate_amenity) | **POST** /workspaces/amenities/{amenity_id}/deactivate | Deactivate Amenity
+*AmenitiesApi* | [**deprecate_amenity**](docs/AmenitiesApi.md#deprecate_amenity) | **POST** /workspaces/amenities/{amenity_id}/deprecate | Deprecate Amenity
+*AmenitiesApi* | [**get_amenities_batch**](docs/AmenitiesApi.md#get_amenities_batch) | **POST** /workspaces/amenities/batch | Get Amenities Batch
+*AmenitiesApi* | [**get_amenity**](docs/AmenitiesApi.md#get_amenity) | **GET** /workspaces/amenities/{amenity_id} | Get Amenity
+*AmenitiesApi* | [**list_amenities**](docs/AmenitiesApi.md#list_amenities) | **POST** /workspaces/amenities/list | List Amenities
+*CategoriesApi* | [**activate_category**](docs/CategoriesApi.md#activate_category) | **POST** /workspaces/categories/{category_id}/activate | Activate Category
+*CategoriesApi* | [**create_category**](docs/CategoriesApi.md#create_category) | **POST** /workspaces/categories/ | Create Category
+*CategoriesApi* | [**deactivate_category**](docs/CategoriesApi.md#deactivate_category) | **POST** /workspaces/categories/{category_id}/deactivate | Deactivate Category
+*CategoriesApi* | [**deprecate_category**](docs/CategoriesApi.md#deprecate_category) | **POST** /workspaces/categories/{category_id}/deprecate | Deprecate Category
+*CategoriesApi* | [**get_categories_batch**](docs/CategoriesApi.md#get_categories_batch) | **POST** /workspaces/categories/batch | Get Categories Batch
+*CategoriesApi* | [**get_category**](docs/CategoriesApi.md#get_category) | **GET** /workspaces/categories/{category_id} | Get Category
+*CategoriesApi* | [**list_categories**](docs/CategoriesApi.md#list_categories) | **POST** /workspaces/categories/list | List Categories
+*FeaturesApi* | [**activate_feature**](docs/FeaturesApi.md#activate_feature) | **POST** /workspaces/features/{workspace_id}/activate | Activate Feature
+*FeaturesApi* | [**create_feature**](docs/FeaturesApi.md#create_feature) | **POST** /workspaces/features | Create Feature
+*FeaturesApi* | [**deactivate_feature**](docs/FeaturesApi.md#deactivate_feature) | **POST** /workspaces/features/{workspace_id}/deactivate | Deactivate Feature
+*FeaturesApi* | [**delete_feature**](docs/FeaturesApi.md#delete_feature) | **DELETE** /workspaces/features/{workspace_id}/{feature_id} | Delete Feature
+*FeaturesApi* | [**get_features_batch**](docs/FeaturesApi.md#get_features_batch) | **POST** /workspaces/features/batch | Get Features Batch
+*FeaturesApi* | [**get_workspace_features**](docs/FeaturesApi.md#get_workspace_features) | **GET** /workspaces/features/{workspace_id} | Get Workspace Features
+*WorkspacesApi* | [**activate_amenity**](docs/WorkspacesApi.md#activate_amenity) | **POST** /workspaces/amenities/{amenity_id}/activate | Activate Amenity
+*WorkspacesApi* | [**activate_category**](docs/WorkspacesApi.md#activate_category) | **POST** /workspaces/categories/{category_id}/activate | Activate Category
+*WorkspacesApi* | [**activate_feature**](docs/WorkspacesApi.md#activate_feature) | **POST** /workspaces/features/{workspace_id}/activate | Activate Feature
+*WorkspacesApi* | [**create_amenity**](docs/WorkspacesApi.md#create_amenity) | **POST** /workspaces/amenities/ | Create Amenity
+*WorkspacesApi* | [**create_category**](docs/WorkspacesApi.md#create_category) | **POST** /workspaces/categories/ | Create Category
+*WorkspacesApi* | [**create_feature**](docs/WorkspacesApi.md#create_feature) | **POST** /workspaces/features | Create Feature
 *WorkspacesApi* | [**create_workspace**](docs/WorkspacesApi.md#create_workspace) | **POST** /workspaces/ | Create Workspace
-*WorkspacesApi* | [**delete_workspace**](docs/WorkspacesApi.md#delete_workspace) | **DELETE** /workspaces/{workspace_id} | Delete Workspace
-*WorkspacesApi* | [**get_workspace**](docs/WorkspacesApi.md#get_workspace) | **GET** /workspaces/{workspace_id} | Get Workspace
+*WorkspacesApi* | [**deactivate_amenity**](docs/WorkspacesApi.md#deactivate_amenity) | **POST** /workspaces/amenities/{amenity_id}/deactivate | Deactivate Amenity
+*WorkspacesApi* | [**deactivate_category**](docs/WorkspacesApi.md#deactivate_category) | **POST** /workspaces/categories/{category_id}/deactivate | Deactivate Category
+*WorkspacesApi* | [**deactivate_feature**](docs/WorkspacesApi.md#deactivate_feature) | **POST** /workspaces/features/{workspace_id}/deactivate | Deactivate Feature
+*WorkspacesApi* | [**delete_feature**](docs/WorkspacesApi.md#delete_feature) | **DELETE** /workspaces/features/{workspace_id}/{feature_id} | Delete Feature
+*WorkspacesApi* | [**delete_workspace**](docs/WorkspacesApi.md#delete_workspace) | **DELETE** /workspaces/{base62_id} | Delete Workspace
+*WorkspacesApi* | [**deprecate_amenity**](docs/WorkspacesApi.md#deprecate_amenity) | **POST** /workspaces/amenities/{amenity_id}/deprecate | Deprecate Amenity
+*WorkspacesApi* | [**deprecate_category**](docs/WorkspacesApi.md#deprecate_category) | **POST** /workspaces/categories/{category_id}/deprecate | Deprecate Category
+*WorkspacesApi* | [**get_amenities_batch**](docs/WorkspacesApi.md#get_amenities_batch) | **POST** /workspaces/amenities/batch | Get Amenities Batch
+*WorkspacesApi* | [**get_amenity**](docs/WorkspacesApi.md#get_amenity) | **GET** /workspaces/amenities/{amenity_id} | Get Amenity
+*WorkspacesApi* | [**get_categories_batch**](docs/WorkspacesApi.md#get_categories_batch) | **POST** /workspaces/categories/batch | Get Categories Batch
+*WorkspacesApi* | [**get_category**](docs/WorkspacesApi.md#get_category) | **GET** /workspaces/categories/{category_id} | Get Category
+*WorkspacesApi* | [**get_features_batch**](docs/WorkspacesApi.md#get_features_batch) | **POST** /workspaces/features/batch | Get Features Batch
 *WorkspacesApi* | [**get_workspace_by_handle**](docs/WorkspacesApi.md#get_workspace_by_handle) | **GET** /workspaces/handle/{handle} | Get Workspace By Handle
+*WorkspacesApi* | [**get_workspace_by_id**](docs/WorkspacesApi.md#get_workspace_by_id) | **GET** /workspaces/{base62_id} | Get Workspace By Id
+*WorkspacesApi* | [**get_workspace_features**](docs/WorkspacesApi.md#get_workspace_features) | **GET** /workspaces/features/{workspace_id} | Get Workspace Features
+*WorkspacesApi* | [**get_workspaces_by_bbox**](docs/WorkspacesApi.md#get_workspaces_by_bbox) | **POST** /workspaces/bbox | Get Workspaces By Bbox
+*WorkspacesApi* | [**list_amenities**](docs/WorkspacesApi.md#list_amenities) | **POST** /workspaces/amenities/list | List Amenities
+*WorkspacesApi* | [**list_categories**](docs/WorkspacesApi.md#list_categories) | **POST** /workspaces/categories/list | List Categories
 *WorkspacesApi* | [**list_workspaces**](docs/WorkspacesApi.md#list_workspaces) | **POST** /workspaces/list | List Workspaces
-*WorkspacesApi* | [**update_workspace**](docs/WorkspacesApi.md#update_workspace) | **PUT** /workspaces/{workspace_id} | Update Workspace
-*WorkspacesApi* | [**update_workspace_status**](docs/WorkspacesApi.md#update_workspace_status) | **POST** /workspaces/{workspace_id}/status | Update Workspace Status
-*WorkspacesApi* | [**validate_workspace_exists**](docs/WorkspacesApi.md#validate_workspace_exists) | **GET** /workspaces/{workspace_id}/exist | Validate Workspace Exists
+*WorkspacesApi* | [**update_workspace**](docs/WorkspacesApi.md#update_workspace) | **PUT** /workspaces/{base62_id} | Update Workspace
 
 
 ## Documentation For Models
 
- - [AmenityCreate](docs/AmenityCreate.md)
+ - [Amenity](docs/Amenity.md)
  - [AmenityFilters](docs/AmenityFilters.md)
  - [AmenityStatus](docs/AmenityStatus.md)
  - [AmenityType](docs/AmenityType.md)
- - [AmenityUpdate](docs/AmenityUpdate.md)
  - [BBox](docs/BBox.md)
- - [BatchAmenitiesRequest](docs/BatchAmenitiesRequest.md)
- - [BatchCategoriesRequest](docs/BatchCategoriesRequest.md)
- - [BatchFeaturesRequest](docs/BatchFeaturesRequest.md)
- - [BatchFeaturesResponse](docs/BatchFeaturesResponse.md)
- - [BatchWorkspacesRequest](docs/BatchWorkspacesRequest.md)
- - [BatchWorkspacesResponse](docs/BatchWorkspacesResponse.md)
- - [CategoryAmenityStatus](docs/CategoryAmenityStatus.md)
- - [CategoryCreate](docs/CategoryCreate.md)
+ - [Category](docs/Category.md)
  - [CategoryFilters](docs/CategoryFilters.md)
- - [CategoryUpdate](docs/CategoryUpdate.md)
+ - [CategoryStatus](docs/CategoryStatus.md)
+ - [CreateAmenityRequest](docs/CreateAmenityRequest.md)
+ - [CreateCategoryRequest](docs/CreateCategoryRequest.md)
  - [CreateFeatureRequest](docs/CreateFeatureRequest.md)
- - [FeatureResponse](docs/FeatureResponse.md)
+ - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
+ - [Feature](docs/Feature.md)
  - [FeatureStatus](docs/FeatureStatus.md)
+ - [GetAmenitiesBatchRequest](docs/GetAmenitiesBatchRequest.md)
+ - [GetAmenitiesBatchResponse](docs/GetAmenitiesBatchResponse.md)
+ - [GetCategoriesBatchRequest](docs/GetCategoriesBatchRequest.md)
+ - [GetCategoriesBatchResponse](docs/GetCategoriesBatchResponse.md)
+ - [GetFeaturesBatchRequest](docs/GetFeaturesBatchRequest.md)
+ - [GetFeaturesBatchResponse](docs/GetFeaturesBatchResponse.md)
  - [HTTPValidationError](docs/HTTPValidationError.md)
  - [LatLng](docs/LatLng.md)
  - [ListAmenitiesRequest](docs/ListAmenitiesRequest.md)
+ - [ListAmenitiesResponse](docs/ListAmenitiesResponse.md)
  - [ListCategoriesRequest](docs/ListCategoriesRequest.md)
+ - [ListCategoriesResponse](docs/ListCategoriesResponse.md)
+ - [ListWorkspaceFeaturesResponse](docs/ListWorkspaceFeaturesResponse.md)
  - [ListWorkspacesRequest](docs/ListWorkspacesRequest.md)
  - [ListWorkspacesResponse](docs/ListWorkspacesResponse.md)
  - [PageRequest](docs/PageRequest.md)
  - [PageResponse](docs/PageResponse.md)
- - [UpdateCategoryAmenity](docs/UpdateCategoryAmenity.md)
+ - [Point](docs/Point.md)
+ - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
  - [ValidationError](docs/ValidationError.md)
  - [ValidationErrorLocInner](docs/ValidationErrorLocInner.md)
+ - [Workspace](docs/Workspace.md)
  - [WorkspaceBBoxFilters](docs/WorkspaceBBoxFilters.md)
- - [WorkspaceBBoxQuery](docs/WorkspaceBBoxQuery.md)
- - [WorkspaceCreate](docs/WorkspaceCreate.md)
+ - [WorkspaceBBoxQueryRequest](docs/WorkspaceBBoxQueryRequest.md)
  - [WorkspaceFilters](docs/WorkspaceFilters.md)
- - [WorkspaceResponse](docs/WorkspaceResponse.md)
  - [WorkspaceStatus](docs/WorkspaceStatus.md)
- - [WorkspaceStatusUpdate](docs/WorkspaceStatusUpdate.md)
  - [WorkspaceType](docs/WorkspaceType.md)
- - [WorkspaceUpdate](docs/WorkspaceUpdate.md)
 
 
 <a id="documentation-for-authorization"></a>

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from workspace_sdk.models.category_status import CategoryStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +27,10 @@ class CategoryFilters(BaseModel):
     """
     CategoryFilters
     """ # noqa: E501
+    status: Optional[CategoryStatus] = None
     name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name"]
+    key: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["status", "name", "key"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -68,10 +71,20 @@ class CategoryFilters(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
             _dict['name'] = None
+
+        # set to None if key (nullable) is None
+        # and model_fields_set contains the field
+        if self.key is None and "key" in self.model_fields_set:
+            _dict['key'] = None
 
         return _dict
 
@@ -85,7 +98,9 @@ class CategoryFilters(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name")
+            "status": obj.get("status"),
+            "name": obj.get("name"),
+            "key": obj.get("key")
         })
         return _obj
 

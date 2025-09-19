@@ -12,7 +12,7 @@ from app.schema.workspace.category.types import WorkspaceCategory
 class WorkspaceCategoryQueries:
 
     @strawberry.field
-    async def categories(
+    async def workspace_categories(
         self, info: strawberry.Info[Context]
     ) -> List[WorkspaceCategory]:
         response = await safe_sdk_call(info.context.category_api.list_categories)

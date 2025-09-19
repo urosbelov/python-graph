@@ -3,7 +3,7 @@ import asyncio
 from typing import Any, List, Optional
 from strawberry.dataloader import DataLoader
 from strawberry.exceptions import GraphQLError
-from workspace_sdk.workspace_sdk import CategoriesApi, BatchCategoriesRequest
+from workspace_sdk.workspace_sdk import CategoriesApi, GetCategoriesBatchRequest
 from workspace_sdk.workspace_sdk.exceptions import ApiException
 
 
@@ -16,18 +16,14 @@ async def load_categories(
     Returns a list of category objects in the same order as keys.
     """
     try:
-        # Wrap keys into SDK request model
-        request_body = BatchCategoriesRequest(ids=keys)
+        request_body = GetCategoriesBatchRequest(category_ids=keys)
 
-        # Call SDK batch method in thread
         batch_response = await asyncio.to_thread(
-            categories_api.batch_categories, request_body
+            categories_api.get_categories_batch, request_body
         )
 
-        # Extract the inner dict of categories
-        categories_dict = batch_response.get("categories", {})
+        categories_dict = batch_response.categories
 
-        # Map results to the same order as requested keys
         return [categories_dict.get(str(key)) for key in keys]
 
     except ApiException as e:
