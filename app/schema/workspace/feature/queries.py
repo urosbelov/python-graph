@@ -2,7 +2,7 @@ from typing import List
 import strawberry
 
 from app.context import Context
-from app.helpers.mapper import map_to_graphql_type
+from app.helpers.converter.core import StrawberryConverter
 from app.helpers.sdk.call import safe_sdk_call
 from app.helpers.sdk.extract import extract_items
 from app.schema.workspace.feature.types import WorkspaceFeature
@@ -18,8 +18,9 @@ class WorkspaceFeatureQueries:
     async def workspace_features(
         self, workspace_id: strawberry.ID, info: strawberry.Info[Context]
     ) -> List[WorkspaceFeature]:
+        converter = StrawberryConverter()
         response = await safe_sdk_call(
             info.context.feature_api.get_workspace_features, workspace_id
         )
         items = extract_items(response)
-        return [map_to_graphql_type(item, WorkspaceFeature) for item in items]
+        return converter.from_sdk(items, WorkspaceFeature)

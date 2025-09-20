@@ -1,6 +1,6 @@
 import strawberry
 from app.context import Context
-from app.helpers.mapper import map_to_graphql_type
+from app.schema.shared.scalars import Base62ID
 from app.schema.workspace.inputs import CreateWorkspaceInput, UpdateWorkspaceInput
 from app.schema.workspace.types import Workspace
 from app.helpers.sdk.call import safe_sdk_call
@@ -9,6 +9,7 @@ from app.helpers.sdk.call import safe_sdk_call
 from app.schema.workspace.category.mutations import WorkspaceCategoryMutations
 from app.schema.workspace.amenity.mutations import WorkspaceAmenityMutations
 from app.schema.workspace.feature.mutations import WorkspaceFeatureMutations
+from app.helpers.converter import StrawberryConverter
 
 
 @strawberry.type
@@ -20,34 +21,34 @@ class WorkspaceMutations(
     async def create_workspace(
         self, input: CreateWorkspaceInput, info: strawberry.Info[Context]
     ) -> Workspace:
-        input_data = input.__dict__
+        converter = StrawberryConverter()
         workspace = await safe_sdk_call(
             info.context.workspace_api.create_workspace,
-            input_data,
+            converter.to_dict(input),
             context=info.context,
         )
-        return map_to_graphql_type(workspace, Workspace)
+        return converter.from_sdk(workspace, Workspace)
 
     @strawberry.mutation
     async def update_workspace(
         self,
-        workspace_id: strawberry.ID,
+        workspace_id: Base62ID,  # type: ignore
         input: UpdateWorkspaceInput,
         info: strawberry.Info[Context],
     ) -> Workspace:
-        input_data = {k: v for k, v in input.__dict__.items() if v is not None}
+        converter = StrawberryConverter()
         workspace = await safe_sdk_call(
             info.context.workspace_api.update_workspace,
             workspace_id,
-            input_data,
+            converter.to_dict(input),
             context=info.context,
         )
-        return map_to_graphql_type(workspace, Workspace)
+        return converter.from_sdk(workspace, Workspace)
 
     @strawberry.mutation
     async def delete_workspace(
         self,
-        workspace_id: strawberry.ID,
+        workspace_id: Base62ID,  # type: ignore
         info: strawberry.Info[Context],
     ) -> None:
         await safe_sdk_call(

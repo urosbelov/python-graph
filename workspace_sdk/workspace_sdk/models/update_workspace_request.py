@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from workspace_sdk.models.point import Point
 from workspace_sdk.models.workspace_type import WorkspaceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +35,8 @@ class UpdateWorkspaceRequest(BaseModel):
     avatar_id: Optional[UUID] = None
     cover_id: Optional[UUID] = None
     formatted_address: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["type", "name", "description", "avatar_id", "cover_id", "formatted_address"]
+    location: Optional[Point] = None
+    __properties: ClassVar[List[str]] = ["type", "name", "description", "avatar_id", "cover_id", "formatted_address", "location"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,6 +77,9 @@ class UpdateWorkspaceRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of location
+        if self.location:
+            _dict['location'] = self.location.to_dict()
         # set to None if type (nullable) is None
         # and model_fields_set contains the field
         if self.type is None and "type" in self.model_fields_set:
@@ -105,6 +110,11 @@ class UpdateWorkspaceRequest(BaseModel):
         if self.formatted_address is None and "formatted_address" in self.model_fields_set:
             _dict['formatted_address'] = None
 
+        # set to None if location (nullable) is None
+        # and model_fields_set contains the field
+        if self.location is None and "location" in self.model_fields_set:
+            _dict['location'] = None
+
         return _dict
 
     @classmethod
@@ -122,7 +132,8 @@ class UpdateWorkspaceRequest(BaseModel):
             "description": obj.get("description"),
             "avatar_id": obj.get("avatar_id"),
             "cover_id": obj.get("cover_id"),
-            "formatted_address": obj.get("formatted_address")
+            "formatted_address": obj.get("formatted_address"),
+            "location": Point.from_dict(obj["location"]) if obj.get("location") is not None else None
         })
         return _obj
 

@@ -2,6 +2,8 @@ from datetime import datetime
 from typing import Optional
 import strawberry
 
+from app.schema.shared.geospatial import LocationInput
+
 
 @strawberry.input
 class CreateWorkspaceInput:
@@ -14,6 +16,7 @@ class CreateWorkspaceInput:
 class UpdateWorkspaceInput:
     name: Optional[str] = None
     description: Optional[str] = None
+    location: Optional[LocationInput] = None
 
 
 @strawberry.input

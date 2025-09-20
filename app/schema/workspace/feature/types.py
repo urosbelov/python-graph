@@ -4,7 +4,7 @@ from typing import Optional
 import strawberry
 
 from app.context import Context
-from app.helpers.mapper import map_to_graphql_type
+from app.helpers.converter.core import StrawberryConverter
 from app.schema.workspace.amenity.types import WorkspaceAmenity
 
 
@@ -40,7 +40,6 @@ class WorkspaceFeature:
     async def amenity(
         self, info: strawberry.Info[Context]
     ) -> Optional[WorkspaceAmenity]:
+        converter = StrawberryConverter()
         amenity = await info.context.amenity_loader.load(int(self.amenity_id))
-        if amenity is None:
-            return None
-        return map_to_graphql_type(amenity, WorkspaceAmenity)
+        return converter.from_sdk(amenity, WorkspaceAmenity)

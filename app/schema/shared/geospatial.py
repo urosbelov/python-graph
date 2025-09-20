@@ -2,9 +2,9 @@ import strawberry
 
 
 @strawberry.input
-class LatLngInput:
-    lat: float
-    lng: float
+class LocationInput:
+    latitude: float
+    longitude: float
 
 
 @strawberry.type
@@ -15,5 +15,5 @@ class Location:
 
 @strawberry.input
 class BBoxInput:
-    south_west: LatLngInput
-    north_east: LatLngInput
+    south_west: LocationInput
+    north_east: LocationInput

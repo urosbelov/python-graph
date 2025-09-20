@@ -6,8 +6,9 @@ import strawberry
 from app.core.logger import logger
 
 from app.context import Context
-from app.helpers.mapper import map_to_graphql_type
+from app.helpers.converter.core import StrawberryConverter
 from app.schema.scalars import Base62ID
+from app.schema.shared.geospatial import Location
 from app.schema.user.types import User
 from app.schema.workspace.category.types import WorkspaceCategory
 
@@ -44,6 +45,7 @@ class Workspace:
     cover_id: Optional[str] = None
     formatted_address: Optional[str] = None
     created_by: Optional[strawberry.ID]
+    location: Optional[Location] = None
 
     # ----------
     # Field resolvers
@@ -51,16 +53,14 @@ class Workspace:
     @strawberry.field
     async def created_by_user(self, info: strawberry.Info[Context]) -> Optional[User]:
         user_obj = await info.context.users_loader.load(self.created_by)
-        if user_obj is None:
-            return None
-        return map_to_graphql_type(user_obj, User)
+        converter = StrawberryConverter()
+        return converter.from_sdk(user_obj, User)
 
     @strawberry.field
     async def category(
         self, info: strawberry.Info[Context]
     ) -> Optional[WorkspaceCategory]:
         logger.info(f"Loading category for workspace: {self.id}")
+        converter = StrawberryConverter()
         category_obj = await info.context.category_loader.load(int(self.category_id))
-        if category_obj is None:
-            return None
-        return map_to_graphql_type(category_obj, WorkspaceCategory)
+        return converter.from_sdk(category_obj, WorkspaceCategory)

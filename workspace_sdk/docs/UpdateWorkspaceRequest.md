@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **avatar_id** | **str** |  | [optional] 
 **cover_id** | **str** |  | [optional] 
 **formatted_address** | **str** |  | [optional] 
+**location** | [**Point**](Point.md) |  | [optional] 
 
 ## Example
 
