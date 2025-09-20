@@ -6,10 +6,12 @@ from strawberry.dataloader import DataLoader
 
 from strawberry.fastapi import BaseContext
 from app.loaders.amenity import create_amenity_loader
+from app.loaders.media import create_media_loader
 from app.loaders.post_media import create_post_media_loader
 from app.loaders.posts import create_post_loader
 from app.loaders.user import create_user_loader
 from app.loaders.workspace import create_workspace_loader
+from media_sdk.media_sdk.api.media_api import ApiClient as MediaApiClient, MediaApi
 from workspace_sdk.workspace_sdk import (
     ApiClient as WorkspaceApiClient,
     Configuration,
@@ -54,6 +56,15 @@ class Context(BaseContext):
         config.timeout = 10.0
 
         return WorkspacesApi(WorkspaceApiClient(configuration=config))
+
+    @cached_property
+    def media_api(self) -> MediaApi:
+        host = os.getenv("MEDIA_SERVICE_URL", "http://0.0.0.0:4007")
+        config = Configuration()
+        config.host = host
+        config.retries = 3
+        config.timeout = 10.0
+        return MediaApi(MediaApiClient(configuration=config))
 
     @cached_property
     def category_api(self) -> CategoriesApi:
@@ -144,6 +155,10 @@ class Context(BaseContext):
     @cached_property
     def workspaces_loader(self) -> DataLoader:
         return create_workspace_loader(self.workspace_api)
+
+    @cached_property
+    def media_loader(self) -> DataLoader:
+        return create_media_loader(self.media_api)
 
 
 async def get_context() -> Context:
