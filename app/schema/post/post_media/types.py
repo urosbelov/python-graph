@@ -1,5 +1,6 @@
 from typing import List, Optional
 import strawberry
+from app.schema.scalars import Base62ID
 
 
 @strawberry.type
@@ -12,7 +13,7 @@ class MediaField:
 class PostMedia:
     # Core
     id: strawberry.ID
-    post_id: strawberry.ID
+    post_id: Base62ID  # type: ignore
     alt_text: Optional[str] = None
     media_id: strawberry.ID
 

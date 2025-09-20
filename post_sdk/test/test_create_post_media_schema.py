@@ -35,13 +35,13 @@ class TestCreatePostMediaSchema(unittest.TestCase):
         model = CreatePostMediaSchema()
         if include_optional:
             return CreatePostMediaSchema(
-                post_id = '',
+                post_id = 56,
                 media_id = '',
                 alt_text = ''
             )
         else:
             return CreatePostMediaSchema(
-                post_id = '',
+                post_id = 56,
                 media_id = '',
         )
         """

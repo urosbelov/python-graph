@@ -51,6 +51,8 @@ __all__ = [
     "GetCategoriesBatchResponse",
     "GetFeaturesBatchRequest",
     "GetFeaturesBatchResponse",
+    "GetWorkspacesBatchRequest",
+    "GetWorkspacesBatchResponse",
     "HTTPValidationError",
     "LatLng",
     "ListAmenitiesRequest",
@@ -113,6 +115,8 @@ if __import__("typing").TYPE_CHECKING:
     from workspace_sdk.models.get_categories_batch_response import GetCategoriesBatchResponse as GetCategoriesBatchResponse
     from workspace_sdk.models.get_features_batch_request import GetFeaturesBatchRequest as GetFeaturesBatchRequest
     from workspace_sdk.models.get_features_batch_response import GetFeaturesBatchResponse as GetFeaturesBatchResponse
+    from workspace_sdk.models.get_workspaces_batch_request import GetWorkspacesBatchRequest as GetWorkspacesBatchRequest
+    from workspace_sdk.models.get_workspaces_batch_response import GetWorkspacesBatchResponse as GetWorkspacesBatchResponse
     from workspace_sdk.models.http_validation_error import HTTPValidationError as HTTPValidationError
     from workspace_sdk.models.lat_lng import LatLng as LatLng
     from workspace_sdk.models.list_amenities_request import ListAmenitiesRequest as ListAmenitiesRequest
@@ -181,6 +185,8 @@ from workspace_sdk.models.get_categories_batch_request import GetCategoriesBatch
 from workspace_sdk.models.get_categories_batch_response import GetCategoriesBatchResponse as GetCategoriesBatchResponse
 from workspace_sdk.models.get_features_batch_request import GetFeaturesBatchRequest as GetFeaturesBatchRequest
 from workspace_sdk.models.get_features_batch_response import GetFeaturesBatchResponse as GetFeaturesBatchResponse
+from workspace_sdk.models.get_workspaces_batch_request import GetWorkspacesBatchRequest as GetWorkspacesBatchRequest
+from workspace_sdk.models.get_workspaces_batch_response import GetWorkspacesBatchResponse as GetWorkspacesBatchResponse
 from workspace_sdk.models.http_validation_error import HTTPValidationError as HTTPValidationError
 from workspace_sdk.models.lat_lng import LatLng as LatLng
 from workspace_sdk.models.list_amenities_request import ListAmenitiesRequest as ListAmenitiesRequest

@@ -8,7 +8,7 @@ from post_sdk.post_sdk.exceptions import ApiException
 
 
 async def load_post_media(
-    keys: List[str], post_media_api: PostMediaApi
+    keys: List[int], post_media_api: PostMediaApi
 ) -> List[Optional[Any]]:
     """
     Batch load post media using the SDK batch method.

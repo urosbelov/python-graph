@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import StrictInt, StrictStr
 from typing import Optional
 from uuid import UUID
 from post_sdk.models.create_post_schema import CreatePostSchema
@@ -350,7 +350,7 @@ class PostsApi:
     @validate_call
     def delete_post(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -369,8 +369,8 @@ class PostsApi:
         """Delete Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -398,7 +398,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._delete_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -425,7 +425,7 @@ class PostsApi:
     @validate_call
     def delete_post_with_http_info(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -444,8 +444,8 @@ class PostsApi:
         """Delete Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -473,7 +473,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._delete_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -500,7 +500,7 @@ class PostsApi:
     @validate_call
     def delete_post_without_preload_content(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -519,8 +519,8 @@ class PostsApi:
         """Delete Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -548,7 +548,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._delete_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -570,7 +570,7 @@ class PostsApi:
 
     def _delete_post_serialize(
         self,
-        base62_id,
+        post_id,
         x_user_id,
         x_workspace_id,
         _request_auth,
@@ -594,8 +594,8 @@ class PostsApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if base62_id is not None:
-            _path_params['base62_id'] = base62_id
+        if post_id is not None:
+            _path_params['post_id'] = post_id
         # process the query parameters
         # process the header parameters
         if x_user_id is not None:
@@ -621,7 +621,7 @@ class PostsApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/posts/{base62_id}',
+            resource_path='/posts/{post_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -640,7 +640,7 @@ class PostsApi:
     @validate_call
     def flag_post(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -659,8 +659,8 @@ class PostsApi:
         """Flag Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -688,7 +688,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._flag_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -715,7 +715,7 @@ class PostsApi:
     @validate_call
     def flag_post_with_http_info(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -734,8 +734,8 @@ class PostsApi:
         """Flag Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -763,7 +763,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._flag_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -790,7 +790,7 @@ class PostsApi:
     @validate_call
     def flag_post_without_preload_content(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -809,8 +809,8 @@ class PostsApi:
         """Flag Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -838,7 +838,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._flag_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -860,7 +860,7 @@ class PostsApi:
 
     def _flag_post_serialize(
         self,
-        base62_id,
+        post_id,
         x_user_id,
         x_workspace_id,
         _request_auth,
@@ -884,8 +884,8 @@ class PostsApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if base62_id is not None:
-            _path_params['base62_id'] = base62_id
+        if post_id is not None:
+            _path_params['post_id'] = post_id
         # process the query parameters
         # process the header parameters
         if x_user_id is not None:
@@ -911,7 +911,7 @@ class PostsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/posts/{base62_id}/flag',
+            resource_path='/posts/{post_id}/flag',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -930,7 +930,7 @@ class PostsApi:
     @validate_call
     def get_post(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -949,8 +949,8 @@ class PostsApi:
         """Get Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -978,7 +978,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._get_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -1005,7 +1005,7 @@ class PostsApi:
     @validate_call
     def get_post_with_http_info(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -1024,8 +1024,8 @@ class PostsApi:
         """Get Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -1053,7 +1053,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._get_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -1080,7 +1080,7 @@ class PostsApi:
     @validate_call
     def get_post_without_preload_content(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -1099,8 +1099,8 @@ class PostsApi:
         """Get Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -1128,7 +1128,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._get_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -1150,7 +1150,7 @@ class PostsApi:
 
     def _get_post_serialize(
         self,
-        base62_id,
+        post_id,
         x_user_id,
         x_workspace_id,
         _request_auth,
@@ -1174,8 +1174,8 @@ class PostsApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if base62_id is not None:
-            _path_params['base62_id'] = base62_id
+        if post_id is not None:
+            _path_params['post_id'] = post_id
         # process the query parameters
         # process the header parameters
         if x_user_id is not None:
@@ -1201,7 +1201,7 @@ class PostsApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/posts/{base62_id}',
+            resource_path='/posts/{post_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1826,7 +1826,7 @@ class PostsApi:
     @validate_call
     def publish_post(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -1845,8 +1845,8 @@ class PostsApi:
         """Publish Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -1874,7 +1874,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._publish_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -1901,7 +1901,7 @@ class PostsApi:
     @validate_call
     def publish_post_with_http_info(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -1920,8 +1920,8 @@ class PostsApi:
         """Publish Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -1949,7 +1949,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._publish_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -1976,7 +1976,7 @@ class PostsApi:
     @validate_call
     def publish_post_without_preload_content(
         self,
-        base62_id: StrictStr,
+        post_id: StrictInt,
         x_user_id: Optional[UUID] = None,
         x_workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -1995,8 +1995,8 @@ class PostsApi:
         """Publish Post
 
 
-        :param base62_id: (required)
-        :type base62_id: str
+        :param post_id: (required)
+        :type post_id: int
         :param x_user_id:
         :type x_user_id: str
         :param x_workspace_id:
@@ -2024,7 +2024,7 @@ class PostsApi:
         """ # noqa: E501
 
         _param = self._publish_post_serialize(
-            base62_id=base62_id,
+            post_id=post_id,
             x_user_id=x_user_id,
             x_workspace_id=x_workspace_id,
             _request_auth=_request_auth,
@@ -2046,7 +2046,7 @@ class PostsApi:
 
     def _publish_post_serialize(
         self,
-        base62_id,
+        post_id,
         x_user_id,
         x_workspace_id,
         _request_auth,
@@ -2070,8 +2070,8 @@ class PostsApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if base62_id is not None:
-            _path_params['base62_id'] = base62_id
+        if post_id is not None:
+            _path_params['post_id'] = post_id
         # process the query parameters
         # process the header parameters
         if x_user_id is not None:
@@ -2097,7 +2097,7 @@ class PostsApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/posts/{base62_id}/publish',
+            resource_path='/posts/{post_id}/publish',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

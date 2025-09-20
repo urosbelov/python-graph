@@ -5,12 +5,12 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_post**](PostsApi.md#create_post) | **POST** /posts/ | Create Post
-[**delete_post**](PostsApi.md#delete_post) | **DELETE** /posts/{base62_id} | Delete Post
-[**flag_post**](PostsApi.md#flag_post) | **POST** /posts/{base62_id}/flag | Flag Post
-[**get_post**](PostsApi.md#get_post) | **GET** /posts/{base62_id} | Get Post
+[**delete_post**](PostsApi.md#delete_post) | **DELETE** /posts/{post_id} | Delete Post
+[**flag_post**](PostsApi.md#flag_post) | **POST** /posts/{post_id}/flag | Flag Post
+[**get_post**](PostsApi.md#get_post) | **GET** /posts/{post_id} | Get Post
 [**get_posts_batch**](PostsApi.md#get_posts_batch) | **POST** /posts/batch | Get Posts Batch
 [**list_posts**](PostsApi.md#list_posts) | **POST** /posts/list | List Posts
-[**publish_post**](PostsApi.md#publish_post) | **POST** /posts/{base62_id}/publish | Publish Post
+[**publish_post**](PostsApi.md#publish_post) | **POST** /posts/{post_id}/publish | Publish Post
 
 
 # **create_post**
@@ -86,7 +86,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_post**
-> delete_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> delete_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Delete Post
 
@@ -109,13 +109,13 @@ configuration = post_sdk.Configuration(
 with post_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = post_sdk.PostsApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    post_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Delete Post
-        api_instance.delete_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_instance.delete_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
     except Exception as e:
         print("Exception when calling PostsApi->delete_post: %s\n" % e)
 ```
@@ -127,7 +127,7 @@ with post_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **post_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 
 
@@ -154,7 +154,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **flag_post**
-> flag_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> flag_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Flag Post
 
@@ -177,13 +177,13 @@ configuration = post_sdk.Configuration(
 with post_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = post_sdk.PostsApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    post_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Flag Post
-        api_instance.flag_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_instance.flag_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
     except Exception as e:
         print("Exception when calling PostsApi->flag_post: %s\n" % e)
 ```
@@ -195,7 +195,7 @@ with post_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **post_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 
 
@@ -222,7 +222,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_post**
-> Post get_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> Post get_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Get Post
 
@@ -246,13 +246,13 @@ configuration = post_sdk.Configuration(
 with post_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = post_sdk.PostsApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    post_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Get Post
-        api_response = api_instance.get_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_response = api_instance.get_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
         print("The response of PostsApi->get_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -266,7 +266,7 @@ with post_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **post_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 
 
@@ -437,7 +437,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **publish_post**
-> publish_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> publish_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Publish Post
 
@@ -460,13 +460,13 @@ configuration = post_sdk.Configuration(
 with post_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = post_sdk.PostsApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    post_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Publish Post
-        api_instance.publish_post(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_instance.publish_post(post_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
     except Exception as e:
         print("Exception when calling PostsApi->publish_post: %s\n" % e)
 ```
@@ -478,7 +478,7 @@ with post_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **post_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 
 

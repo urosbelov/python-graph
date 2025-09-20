@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from typing import Optional, Set
@@ -29,7 +29,7 @@ class PostMedia(BaseModel):
     PostMedia
     """ # noqa: E501
     id: Optional[UUID] = None
-    post_id: StrictStr
+    post_id: StrictInt
     created_by: UUID
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None

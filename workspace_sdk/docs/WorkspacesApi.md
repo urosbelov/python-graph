@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**deactivate_category**](WorkspacesApi.md#deactivate_category) | **POST** /workspaces/categories/{category_id}/deactivate | Deactivate Category
 [**deactivate_feature**](WorkspacesApi.md#deactivate_feature) | **POST** /workspaces/features/{workspace_id}/deactivate | Deactivate Feature
 [**delete_feature**](WorkspacesApi.md#delete_feature) | **DELETE** /workspaces/features/{workspace_id}/{feature_id} | Delete Feature
-[**delete_workspace**](WorkspacesApi.md#delete_workspace) | **DELETE** /workspaces/{base62_id} | Delete Workspace
+[**delete_workspace**](WorkspacesApi.md#delete_workspace) | **DELETE** /workspaces/{workspace_id} | Delete Workspace
 [**deprecate_amenity**](WorkspacesApi.md#deprecate_amenity) | **POST** /workspaces/amenities/{amenity_id}/deprecate | Deprecate Amenity
 [**deprecate_category**](WorkspacesApi.md#deprecate_category) | **POST** /workspaces/categories/{category_id}/deprecate | Deprecate Category
 [**get_amenities_batch**](WorkspacesApi.md#get_amenities_batch) | **POST** /workspaces/amenities/batch | Get Amenities Batch
@@ -24,13 +24,14 @@ Method | HTTP request | Description
 [**get_category**](WorkspacesApi.md#get_category) | **GET** /workspaces/categories/{category_id} | Get Category
 [**get_features_batch**](WorkspacesApi.md#get_features_batch) | **POST** /workspaces/features/batch | Get Features Batch
 [**get_workspace_by_handle**](WorkspacesApi.md#get_workspace_by_handle) | **GET** /workspaces/handle/{handle} | Get Workspace By Handle
-[**get_workspace_by_id**](WorkspacesApi.md#get_workspace_by_id) | **GET** /workspaces/{base62_id} | Get Workspace By Id
+[**get_workspace_by_id**](WorkspacesApi.md#get_workspace_by_id) | **GET** /workspaces/{workspace_id} | Get Workspace By Id
 [**get_workspace_features**](WorkspacesApi.md#get_workspace_features) | **GET** /workspaces/features/{workspace_id} | Get Workspace Features
+[**get_workspaces_batch**](WorkspacesApi.md#get_workspaces_batch) | **POST** /workspaces/batch | Get Workspaces Batch
 [**get_workspaces_by_bbox**](WorkspacesApi.md#get_workspaces_by_bbox) | **POST** /workspaces/bbox | Get Workspaces By Bbox
 [**list_amenities**](WorkspacesApi.md#list_amenities) | **POST** /workspaces/amenities/list | List Amenities
 [**list_categories**](WorkspacesApi.md#list_categories) | **POST** /workspaces/categories/list | List Categories
 [**list_workspaces**](WorkspacesApi.md#list_workspaces) | **POST** /workspaces/list | List Workspaces
-[**update_workspace**](WorkspacesApi.md#update_workspace) | **PUT** /workspaces/{base62_id} | Update Workspace
+[**update_workspace**](WorkspacesApi.md#update_workspace) | **PUT** /workspaces/{workspace_id} | Update Workspace
 
 
 # **activate_amenity**
@@ -806,7 +807,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_workspace**
-> object delete_workspace(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> object delete_workspace(workspace_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Delete Workspace
 
@@ -829,13 +830,13 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.WorkspacesApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    workspace_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Delete Workspace
-        api_response = api_instance.delete_workspace(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_response = api_instance.delete_workspace(workspace_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
         print("The response of WorkspacesApi->delete_workspace:\n")
         pprint(api_response)
     except Exception as e:
@@ -849,7 +850,7 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **workspace_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 
 
@@ -1441,7 +1442,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workspace_by_id**
-> Workspace get_workspace_by_id(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> Workspace get_workspace_by_id(workspace_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Get Workspace By Id
 
@@ -1465,13 +1466,13 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.WorkspacesApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    workspace_id = 56 # int | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Get Workspace By Id
-        api_response = api_instance.get_workspace_by_id(base62_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_response = api_instance.get_workspace_by_id(workspace_id, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
         print("The response of WorkspacesApi->get_workspace_by_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -1485,7 +1486,7 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **workspace_id** | **int**|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 
 
@@ -1571,6 +1572,78 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_workspaces_batch**
+> GetWorkspacesBatchResponse get_workspaces_batch(get_workspaces_batch_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+
+Get Workspaces Batch
+
+### Example
+
+
+```python
+import workspace_sdk
+from workspace_sdk.models.get_workspaces_batch_request import GetWorkspacesBatchRequest
+from workspace_sdk.models.get_workspaces_batch_response import GetWorkspacesBatchResponse
+from workspace_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = workspace_sdk.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with workspace_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = workspace_sdk.WorkspacesApi(api_client)
+    get_workspaces_batch_request = workspace_sdk.GetWorkspacesBatchRequest() # GetWorkspacesBatchRequest | 
+    x_user_id = 'x_user_id_example' # str |  (optional)
+    x_workspace_id = 'x_workspace_id_example' # str |  (optional)
+
+    try:
+        # Get Workspaces Batch
+        api_response = api_instance.get_workspaces_batch(get_workspaces_batch_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        print("The response of WorkspacesApi->get_workspaces_batch:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WorkspacesApi->get_workspaces_batch: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **get_workspaces_batch_request** | [**GetWorkspacesBatchRequest**](GetWorkspacesBatchRequest.md)|  | 
+ **x_user_id** | **str**|  | [optional] 
+ **x_workspace_id** | **str**|  | [optional] 
+
+### Return type
+
+[**GetWorkspacesBatchResponse**](GetWorkspacesBatchResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1871,7 +1944,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_workspace**
-> Workspace update_workspace(base62_id, update_workspace_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+> Workspace update_workspace(workspace_id, update_workspace_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
 
 Update Workspace
 
@@ -1896,14 +1969,14 @@ configuration = workspace_sdk.Configuration(
 with workspace_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = workspace_sdk.WorkspacesApi(api_client)
-    base62_id = 'base62_id_example' # str | 
+    workspace_id = 56 # int | 
     update_workspace_request = workspace_sdk.UpdateWorkspaceRequest() # UpdateWorkspaceRequest | 
     x_user_id = 'x_user_id_example' # str |  (optional)
     x_workspace_id = 'x_workspace_id_example' # str |  (optional)
 
     try:
         # Update Workspace
-        api_response = api_instance.update_workspace(base62_id, update_workspace_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
+        api_response = api_instance.update_workspace(workspace_id, update_workspace_request, x_user_id=x_user_id, x_workspace_id=x_workspace_id)
         print("The response of WorkspacesApi->update_workspace:\n")
         pprint(api_response)
     except Exception as e:
@@ -1917,7 +1990,7 @@ with workspace_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **base62_id** | **str**|  | 
+ **workspace_id** | **int**|  | 
  **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md)|  | 
  **x_user_id** | **str**|  | [optional] 
  **x_workspace_id** | **str**|  | [optional] 

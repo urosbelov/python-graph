@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**post_ids** | **List[str]** |  | 
+**post_ids** | **List[int]** |  | 
 
 ## Example
 

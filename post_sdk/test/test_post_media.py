@@ -36,7 +36,7 @@ class TestPostMedia(unittest.TestCase):
         if include_optional:
             return PostMedia(
                 id = '',
-                post_id = '',
+                post_id = 56,
                 created_by = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -45,7 +45,7 @@ class TestPostMedia(unittest.TestCase):
             )
         else:
             return PostMedia(
-                post_id = '',
+                post_id = 56,
                 created_by = '',
                 media_id = '',
         )

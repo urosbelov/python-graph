@@ -27,6 +27,8 @@ docs/GetCategoriesBatchRequest.md
 docs/GetCategoriesBatchResponse.md
 docs/GetFeaturesBatchRequest.md
 docs/GetFeaturesBatchResponse.md
+docs/GetWorkspacesBatchRequest.md
+docs/GetWorkspacesBatchResponse.md
 docs/HTTPValidationError.md
 docs/LatLng.md
 docs/ListAmenitiesRequest.md
@@ -79,6 +81,8 @@ test/test_get_categories_batch_request.py
 test/test_get_categories_batch_response.py
 test/test_get_features_batch_request.py
 test/test_get_features_batch_response.py
+test/test_get_workspaces_batch_request.py
+test/test_get_workspaces_batch_response.py
 test/test_http_validation_error.py
 test/test_lat_lng.py
 test/test_list_amenities_request.py
@@ -133,6 +137,8 @@ workspace_sdk/models/get_categories_batch_request.py
 workspace_sdk/models/get_categories_batch_response.py
 workspace_sdk/models/get_features_batch_request.py
 workspace_sdk/models/get_features_batch_response.py
+workspace_sdk/models/get_workspaces_batch_request.py
+workspace_sdk/models/get_workspaces_batch_response.py
 workspace_sdk/models/http_validation_error.py
 workspace_sdk/models/lat_lng.py
 workspace_sdk/models/list_amenities_request.py

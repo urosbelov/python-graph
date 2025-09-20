@@ -3,9 +3,11 @@ from enum import Enum
 from typing import Optional
 import strawberry
 
+from app.core.logger import logger
 
 from app.context import Context
 from app.helpers.mapper import map_to_graphql_type
+from app.schema.scalars import Base62ID
 from app.schema.user.types import User
 from app.schema.workspace.category.types import WorkspaceCategory
 
@@ -28,7 +30,7 @@ class WorkspaceStatus(Enum):
 
 @strawberry.type
 class Workspace:
-    id: strawberry.ID
+    id: Base62ID  # type: ignore
     type: WorkspaceType
     status: WorkspaceStatus
     name: str
@@ -57,6 +59,7 @@ class Workspace:
     async def category(
         self, info: strawberry.Info[Context]
     ) -> Optional[WorkspaceCategory]:
+        logger.info(f"Loading category for workspace: {self.id}")
         category_obj = await info.context.category_loader.load(int(self.category_id))
         if category_obj is None:
             return None

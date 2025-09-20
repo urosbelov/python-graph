@@ -91,12 +91,12 @@ Class | Method | HTTP request | Description
 *PostMediaApi* | [**delete_post_media**](docs/PostMediaApi.md#delete_post_media) | **DELETE** /post-media/{post_media_id} | Delete Post Media
 *PostMediaApi* | [**get_post_media_batch**](docs/PostMediaApi.md#get_post_media_batch) | **POST** /post-media/batch | Get Post Media Batch
 *PostsApi* | [**create_post**](docs/PostsApi.md#create_post) | **POST** /posts/ | Create Post
-*PostsApi* | [**delete_post**](docs/PostsApi.md#delete_post) | **DELETE** /posts/{base62_id} | Delete Post
-*PostsApi* | [**flag_post**](docs/PostsApi.md#flag_post) | **POST** /posts/{base62_id}/flag | Flag Post
-*PostsApi* | [**get_post**](docs/PostsApi.md#get_post) | **GET** /posts/{base62_id} | Get Post
+*PostsApi* | [**delete_post**](docs/PostsApi.md#delete_post) | **DELETE** /posts/{post_id} | Delete Post
+*PostsApi* | [**flag_post**](docs/PostsApi.md#flag_post) | **POST** /posts/{post_id}/flag | Flag Post
+*PostsApi* | [**get_post**](docs/PostsApi.md#get_post) | **GET** /posts/{post_id} | Get Post
 *PostsApi* | [**get_posts_batch**](docs/PostsApi.md#get_posts_batch) | **POST** /posts/batch | Get Posts Batch
 *PostsApi* | [**list_posts**](docs/PostsApi.md#list_posts) | **POST** /posts/list | List Posts
-*PostsApi* | [**publish_post**](docs/PostsApi.md#publish_post) | **POST** /posts/{base62_id}/publish | Publish Post
+*PostsApi* | [**publish_post**](docs/PostsApi.md#publish_post) | **POST** /posts/{post_id}/publish | Publish Post
 
 
 ## Documentation For Models

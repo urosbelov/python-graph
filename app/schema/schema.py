@@ -1,7 +1,7 @@
 import strawberry
+from strawberry import relay
 from strawberry.extensions import ValidationCache
 
-from app.schema.post.types import BigInt
 from app.schema.user import UserQueries, UserMutations
 from app.schema.workspace import WorkspaceQueries, WorkspaceMutations
 from app.schema.post import PostQueries, PostMutations

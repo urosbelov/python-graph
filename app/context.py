@@ -9,6 +9,7 @@ from app.loaders.amenity import create_amenity_loader
 from app.loaders.post_media import create_post_media_loader
 from app.loaders.posts import create_post_loader
 from app.loaders.user import create_user_loader
+from app.loaders.workspace import create_workspace_loader
 from workspace_sdk.workspace_sdk import (
     ApiClient as WorkspaceApiClient,
     Configuration,
@@ -139,6 +140,10 @@ class Context(BaseContext):
     @cached_property
     def post_media_loader(self) -> DataLoader:
         return create_post_media_loader(self.post_media_api)
+
+    @cached_property
+    def workspaces_loader(self) -> DataLoader:
+        return create_workspace_loader(self.workspace_api)
 
 
 async def get_context() -> Context:

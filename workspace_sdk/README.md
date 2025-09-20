@@ -116,7 +116,7 @@ Class | Method | HTTP request | Description
 *WorkspacesApi* | [**deactivate_category**](docs/WorkspacesApi.md#deactivate_category) | **POST** /workspaces/categories/{category_id}/deactivate | Deactivate Category
 *WorkspacesApi* | [**deactivate_feature**](docs/WorkspacesApi.md#deactivate_feature) | **POST** /workspaces/features/{workspace_id}/deactivate | Deactivate Feature
 *WorkspacesApi* | [**delete_feature**](docs/WorkspacesApi.md#delete_feature) | **DELETE** /workspaces/features/{workspace_id}/{feature_id} | Delete Feature
-*WorkspacesApi* | [**delete_workspace**](docs/WorkspacesApi.md#delete_workspace) | **DELETE** /workspaces/{base62_id} | Delete Workspace
+*WorkspacesApi* | [**delete_workspace**](docs/WorkspacesApi.md#delete_workspace) | **DELETE** /workspaces/{workspace_id} | Delete Workspace
 *WorkspacesApi* | [**deprecate_amenity**](docs/WorkspacesApi.md#deprecate_amenity) | **POST** /workspaces/amenities/{amenity_id}/deprecate | Deprecate Amenity
 *WorkspacesApi* | [**deprecate_category**](docs/WorkspacesApi.md#deprecate_category) | **POST** /workspaces/categories/{category_id}/deprecate | Deprecate Category
 *WorkspacesApi* | [**get_amenities_batch**](docs/WorkspacesApi.md#get_amenities_batch) | **POST** /workspaces/amenities/batch | Get Amenities Batch
@@ -125,13 +125,14 @@ Class | Method | HTTP request | Description
 *WorkspacesApi* | [**get_category**](docs/WorkspacesApi.md#get_category) | **GET** /workspaces/categories/{category_id} | Get Category
 *WorkspacesApi* | [**get_features_batch**](docs/WorkspacesApi.md#get_features_batch) | **POST** /workspaces/features/batch | Get Features Batch
 *WorkspacesApi* | [**get_workspace_by_handle**](docs/WorkspacesApi.md#get_workspace_by_handle) | **GET** /workspaces/handle/{handle} | Get Workspace By Handle
-*WorkspacesApi* | [**get_workspace_by_id**](docs/WorkspacesApi.md#get_workspace_by_id) | **GET** /workspaces/{base62_id} | Get Workspace By Id
+*WorkspacesApi* | [**get_workspace_by_id**](docs/WorkspacesApi.md#get_workspace_by_id) | **GET** /workspaces/{workspace_id} | Get Workspace By Id
 *WorkspacesApi* | [**get_workspace_features**](docs/WorkspacesApi.md#get_workspace_features) | **GET** /workspaces/features/{workspace_id} | Get Workspace Features
+*WorkspacesApi* | [**get_workspaces_batch**](docs/WorkspacesApi.md#get_workspaces_batch) | **POST** /workspaces/batch | Get Workspaces Batch
 *WorkspacesApi* | [**get_workspaces_by_bbox**](docs/WorkspacesApi.md#get_workspaces_by_bbox) | **POST** /workspaces/bbox | Get Workspaces By Bbox
 *WorkspacesApi* | [**list_amenities**](docs/WorkspacesApi.md#list_amenities) | **POST** /workspaces/amenities/list | List Amenities
 *WorkspacesApi* | [**list_categories**](docs/WorkspacesApi.md#list_categories) | **POST** /workspaces/categories/list | List Categories
 *WorkspacesApi* | [**list_workspaces**](docs/WorkspacesApi.md#list_workspaces) | **POST** /workspaces/list | List Workspaces
-*WorkspacesApi* | [**update_workspace**](docs/WorkspacesApi.md#update_workspace) | **PUT** /workspaces/{base62_id} | Update Workspace
+*WorkspacesApi* | [**update_workspace**](docs/WorkspacesApi.md#update_workspace) | **PUT** /workspaces/{workspace_id} | Update Workspace
 
 
 ## Documentation For Models
@@ -156,6 +157,8 @@ Class | Method | HTTP request | Description
  - [GetCategoriesBatchResponse](docs/GetCategoriesBatchResponse.md)
  - [GetFeaturesBatchRequest](docs/GetFeaturesBatchRequest.md)
  - [GetFeaturesBatchResponse](docs/GetFeaturesBatchResponse.md)
+ - [GetWorkspacesBatchRequest](docs/GetWorkspacesBatchRequest.md)
+ - [GetWorkspacesBatchResponse](docs/GetWorkspacesBatchResponse.md)
  - [HTTPValidationError](docs/HTTPValidationError.md)
  - [LatLng](docs/LatLng.md)
  - [ListAmenitiesRequest](docs/ListAmenitiesRequest.md)

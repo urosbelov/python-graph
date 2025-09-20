@@ -180,6 +180,13 @@ class TestWorkspacesApi(unittest.TestCase):
         """
         pass
 
+    def test_get_workspaces_batch(self) -> None:
+        """Test case for get_workspaces_batch
+
+        Get Workspaces Batch
+        """
+        pass
+
     def test_get_workspaces_by_bbox(self) -> None:
         """Test case for get_workspaces_by_bbox
 

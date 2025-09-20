@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**post_id** | **str** |  | 
+**post_id** | **int** |  | 
 **media_id** | **str** |  | 
 **alt_text** | **str** |  | [optional] 
 

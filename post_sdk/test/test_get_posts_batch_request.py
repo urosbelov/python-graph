@@ -36,13 +36,13 @@ class TestGetPostsBatchRequest(unittest.TestCase):
         if include_optional:
             return GetPostsBatchRequest(
                 ids = [
-                    ''
+                    56
                     ]
             )
         else:
             return GetPostsBatchRequest(
                 ids = [
-                    ''
+                    56
                     ],
         )
         """

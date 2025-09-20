@@ -8,5 +8,5 @@ class PostMediaQueries:
         return "PostMedia"
 
     @strawberry.field
-    def post_medias(self) -> str:
+    def post_media(self) -> str:
         return "PostMedias"

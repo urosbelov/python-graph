@@ -1,25 +1,29 @@
+from app.core.logger import logger
 from typing import List
 import strawberry
 
-from strawberry import Info, ID
+from strawberry import Info
 from app.context import Context
 from app.helpers.mapper import map_to_graphql_type
 from app.helpers.sdk.call import safe_sdk_call
 from app.helpers.sdk.extract import extract_items
 from app.schema.post.post_media.queries import PostMediaQueries
 from app.schema.post.types import Post
+from app.schema.scalars import Base62ID
 
 
 @strawberry.type
 class PostQueries(PostMediaQueries):
     @strawberry.field
-    async def post(self, id: ID, info: Info[Context]) -> Post:
-        workspace_data = await safe_sdk_call(
+    async def post(self, id: Base62ID, info: Info[Context]) -> Post:  # type: ignore
+        logger.debug(f"Fetching post with id: {id}")
+
+        data = await safe_sdk_call(
             info.context.workspace_api.get_workspace_by_id,
             id,
             context=info.context,
         )
-        return map_to_graphql_type(workspace_data, Post) if workspace_data else None
+        return map_to_graphql_type(data, Post) if data else None
 
     @strawberry.field
     async def posts(self, info: Info[Context]) -> List[Post]:
