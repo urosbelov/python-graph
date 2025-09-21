@@ -7,3 +7,5 @@ http:
 clients:
   identity: "http://0.0.0.0:4006"
   workspace: "http://0.0.0.0:4001"
+  post: "http://0.0.0.0:4003"
+  media: "http://0.0.0.0:4007"
